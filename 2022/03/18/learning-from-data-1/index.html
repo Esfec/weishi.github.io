@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="resources, 为事事">
-    <meta name="description" content="循迹逻辑与锻炼文笔">
+    <meta name="keywords" content="learning from data 1, 为事事">
+    <meta name="description" content="为了充实寒假生活，所以打算刷一些关于深度学习的公开课。在林轩田老师的’机器学习基石’这门课的评论区看到有人推荐加州理工大学出品的”Learning From Data” 。看了10分钟，觉得老师挺帅也挺幽默，于是记了一些笔记，希望能坚持下来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>resources | 为事事</title>
+    <title>learning from data 1 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -418,12 +418,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">resources</h1>
+                    <h1 class="description center-align post-title">learning from data 1</h1>
                 </div>
             </div>
         </div>
@@ -537,12 +537,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ml/" class="post-category">
+                                ml
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -551,7 +564,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-17
+                    2022-03-18
                 </div>
                 
 
@@ -565,14 +578,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -592,7 +605,59 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>为了充实寒假生活，所以打算刷一些关于深度学习的公开课。在林轩田老师的’机器学习基石’这门课的评论区看到有人推荐加州理工大学出品的”Learning From Data” 。看了10分钟，觉得老师挺帅也挺幽默，于是记了一些笔记，希望能坚持下来。</p>
+<h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>第一章讲的东西比较简单，首先以”电影评价”的实例引出了机器学习的触发条件，即1.存在一个模式2.这种模式不容易被数学公式直接表达3.我们有关于这种模式的大量数据。紧接着以”信贷审批”的实例介绍了本课的第一个模型——感知机，围绕感知机阐述了”假设空间”、”最佳假设”等名词，并简单介绍了感知机权重更新方法，最后以QA环节结束了第一课。</p>
+<h2 id="the-learning-problem"><a href="#the-learning-problem" class="headerlink" title="the learning problem"></a>the learning problem</h2><ul>
+<li>Example of machine learning</li>
+<li>Components of learning </li>
+<li>A simple model </li>
+<li>types of learning</li>
+<li>QA<h3 id="1-Example-of-machine-learning"><a href="#1-Example-of-machine-learning" class="headerlink" title="1.Example of machine learning"></a>1.Example of machine learning</h3>Predicting how a viewer will rate a movie</li>
+</ul>
+<p><strong>10%</strong> improvement = <strong>1 million dollar prize</strong></p>
+<p><strong>1.1The essence of machine learning:</strong><br>  <strong>1.1.1A pattern exists</strong>(if a pattern did’t exist, there would be nothing to look for )<br>  <strong>1.1.2We cannot pin it down mathematically</strong> (We couldn’t write down the system on our own,so we’re going to depend on data in order to be able to find the system)<br>  <strong>1.1.3.we have a data on it</strong>(learning fron data. so if some one knocks on my door with an interesting machine learning application, and they tell me how existing it is, and how great the application would be ,and how much money they would make, the first question i ask, what data do you have? if you data, we are in business, if you don’t, you are out of luck.)</p>
+<h3 id="2-Components-of-learning"><a href="#2-Components-of-learning" class="headerlink" title="2.Components of learning"></a>2.Components of learning</h3><p><strong>2.1 Metaphor:</strong> credit approval</p>
+<p>you apply for a credit card, and the bank wants to decide whether it’s a good idea to extend a credit card for you or not .From the bank’s point of view, if they’re going to make money ,the are happy. if they are going to lose money,they are not happy. <strong>That’s the only criterion they have</strong></p>
+<p><strong>2.2 Formalization:</strong><br><strong>input:  X</strong>  (customer application. age、gender、annualsalary.etc all kinds of fields that are believed to be related to the creditworthiness)<br><strong>output: y</strong> (extend credit or not to extend credit,+1 and -1.)</p>
+<ul>
+<li><strong>Target function:</strong> $\mathcal{f}$:     $\mathcal{X}$    $\longrightarrow$ $\mathcal{Y}$ (ideal credit approval formula)</li>
+<li><strong>Data:</strong>$(x_1,y_1),(x_2,y_2),···,(x_N,y_N)$</li>
+<li><strong>Hypothesis</strong> $\mathcal{g}$:     $\mathcal{X}$    $\longrightarrow$ $\mathcal{Y}$   such as  Linear module、Neural network、SVM(The Hypothesis is the formal name we’re going to call the formula we get to approximate th target function. So the hypothesis lives in the  same world as the target function.The value of g,it supposedly approximates f)</li>
+</ul>
+<p><strong>2.3 Solutioln components of the learning problem</strong></p>
+<p>The Hypothesis Set(Perceptron model、Neural Network)</p>
+<p>  $\mathcal{H}$={$\mathcal{h}$}&amp;nbsp; &amp;nbsp; &amp;nbsp; $\mathcal{g}$ $\in$  $\mathcal{H}$<br> h is a function,pretty much like the final hypothesis g,g is just one of them that you happen to elect. so whe we elect it, we call it g. if it’s sitting there generically,we call it h</p>
+<p>The Learning Algorithm(perceptron learning algorithm、back propagation)-minimizing an error funnction </p>
+<p>Together, they are referred to as the <strong>learning model</strong> So every time you have a model,there is a hypothesis set,and then there is an algorithm that will do the searching one of those guys</p>
+<p><strong>2.4 A simple hypothesis set - the ‘perceptron’</strong></p>
+<p>For input $X=(x_1,···，x_d)$  &amp;nbsp; &amp;nbsp; &amp;nbsp;d-dimensional vector&amp;nbsp; &amp;nbsp; &amp;nbsp;  ‘attributes of a customer’</p>
+<p>Approve credit if:  $$$\sum_{i=1}^dw_ix_i&gt;threshold$$$</p>
+<p>Deny credit if:     $$$\sum_{i=1}^dw_ix_i &lt; threshold$$$</p>
+<p>This linear formula $\mathcal{h}$ $\in$  $\mathcal{H}$ can be written as:$$$h(x)=sign((\sum_{i=1}^dw_ix_i)-threshold)$$$</p>
+<p><img src="https://files.mdnice.com/user/23843/b66a5b48-212e-4904-a880-7ea0c0b90580.jpg"></p>
+<p>Now we are going to have a simple change of notation.instead of calling it threshold,we’re going to treat it as if it’s a weight. It was minus threshold. Now we call it plus $w_0$:$$$h(x)=sign((\sum_{i=1}^dw_ix_i)-w_0)$$$</p>
+<p>Now we’are going to add $x_0$. This is not an attribute of the customer,but an artifical constant we add,which happens to be alaways +1.When we do that,then all of a sudden the formula simplifies.Summing from i equals 0,instead of i equals 1:$$$h(x)=sign((\sum_{i=0}^dw_ix_i)) $$$ it looks better!<br>And now we put it as a vector,which will simplify matters.In vector form,the perceptron implements:$$$h(x)=sign(W^TX)$$$  <strong>it looks better!</strong></p>
+<p>The hypothesis set tells you the resources you can work with.Now we need the algorithm that is going to look at the data,the training data that you’re going to use,and navigate through the space of bhypothesis, to bring the one that is going to output as the final hypothesis that you give to your customer.<br><img src="https://files.mdnice.com/user/23843/b5a46d16-a3e5-4c56-8fa5-c3215a7c9f60.jpg"></p>
+<p><strong>2.5 A simple learning algorithm - PLA</strong></p>
+<p>The perceptron implements:$$$ h(x)=sign(W^TX)$$$<br>Give the training set:$$$(x_1,y_1),(x_2,y_2),···（x_N,y_N）$$$<br>pick a missclassified point:$$$sign(W^TX_n) \neq y_n$$$<br>and update the weight vector:$$$W\leftarrow W+y_nX_n$$$<br>So this is the intuition behind it<br><img src="https://files.mdnice.com/user/23843/383bb46f-271c-4a96-8fef-7b736a2955c3.jpg"></p>
+<p><strong>2.6 Iteration of PLA</strong></p>
+<p>One iteration of the PLA:$$$W\leftarrow W+yx$$$<br>where(x,y)is a misclassified training point.<br>At iteration $$$\mathcal{t}=1,2,3···$$$，pick a misclassified point from$$$(x_1,y_1),(x_2,y_2),(x_N,y_N)$$$<br>and run a PLA iteration on it.<br>That’s it!</p>
+<p>The good news for the PLA is that all you need to do, is for iteration 1,2,3,4,et cetera,pick a missclassified point,anyone you like.Then end up with the case that you will get to a correct solution.</p>
+<p>Not clear at all that it will be good,because all you did was match the historical records.That’s  why have to develop all of this theory.</p>
+<h3 id="3-types-of-learning"><a href="#3-types-of-learning" class="headerlink" title="3.types of learning"></a>3.types of learning</h3><p><strong>3.1 Basic premise of learning</strong></p>
+<p><em>use a set of observations to uncover an underlying process</em></p>
+<center>broad premise $\Rightarrow$ many variations</center>
+  
+<ul>
+<li>Supervised Learning</li>
+<li>Unsupervised Learning</li>
+<li>Reinforcement Learning<h3 id="4-QA"><a href="#4-QA" class="headerlink" title="4.QA"></a>4.QA</h3></li>
+</ul>
+<p><strong>4.1 How do you determine if a set of points is linearly separable,and what do you do if they’re not separable</strong></p>
+<p>there is a way to deal with it.However,the questino how do you determine it’s linearly separable, the right way of doing it in praticeis that,when someone gives you data,you assume in general it’s not linearly separable.and therefore you take techniques that can deal with<br><strong>4.2 How does the rate of convergennce of the perceptron change with the dimensionality of the data</strong></p>
+<p>Badly</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>虽然是2012年的课，但是对于我这种自学的还是非常有价值的。文中对感知机的训练方法介绍的不是太清楚，我个人的理解是遍历训练集，只要找到判断错误的数据就更新对应的权重。这样，通过不停迭代找到的超平面维度会一直往上升，所以说就不存在一次迭代过程中，更新权重时纠正一个分类错误的点，但导致另外一个已经分对的点分错这种情况。目前先这样理解吧，以后用代码来验证一下想法。</p>
+
                 
             </div>
             <hr/>
@@ -618,7 +683,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/resources/index.html">http://weishicharity.cn/resources/index.html</a>
+                    <a href="http://weishicharity.cn/2022/03/18/learning-from-data-1/">http://weishicharity.cn/2022/03/18/learning-from-data-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -655,7 +720,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -849,18 +918,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/learning-from-data-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="learning from data 2">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">learning from data 2</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -870,18 +938,29 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -889,16 +968,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/learning-from-data-3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="learning from data 3">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">learning from data 3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -909,17 +988,28 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

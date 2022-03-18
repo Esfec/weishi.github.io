@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="resources, 为事事">
-    <meta name="description" content="循迹逻辑与锻炼文笔">
+    <meta name="keywords" content="learning from data 4, 为事事">
+    <meta name="description" content="导言这节课主要内容有非线性转换、损失度量、用概率分布代替目标函数以及对之前讲过的理论做了一下回顾。
+Error and Noise
+Nonlinear transformation
+Error measures
+Noisy targets
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>resources | 为事事</title>
+    <title>learning from data 4 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -418,12 +423,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">resources</h1>
+                    <h1 class="description center-align post-title">learning from data 4</h1>
                 </div>
             </div>
         </div>
@@ -537,12 +542,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ml/" class="post-category">
+                                ml
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -551,7 +569,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-17
+                    2022-03-18
                 </div>
                 
 
@@ -565,14 +583,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -592,7 +610,49 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>这节课主要内容有非线性转换、损失度量、用概率分布代替目标函数以及对之前讲过的理论做了一下回顾。</p>
+<h2 id="Error-and-Noise"><a href="#Error-and-Noise" class="headerlink" title="Error and Noise"></a>Error and Noise</h2><ul>
+<li>Nonlinear transformation</li>
+<li>Error measures</li>
+<li>Noisy targets</li>
+<li>Preamble to the theory<h3 id="1-Nonlinear-transformation"><a href="#1-Nonlinear-transformation" class="headerlink" title="1.Nonlinear transformation"></a>1.Nonlinear transformation</h3>To strengthen linear models even further,we introduce nonlinear transformation;and the idea behind it is that the signal is not only linear in X，which is what you would think of,as the reason we call this linear system.<strong>But actually they are linear in w</strong>, the vector.The linearity in w is the <strong>key point</strong>.<br><img src="https://files.mdnice.com/user/23843/24df0e52-2273-4e2d-bfa5-3aae7f51358a.png"></li>
+</ul>
+<h3 id="2-Error-measures"><a href="#2-Error-measures" class="headerlink" title="2.Error measures"></a>2.Error measures</h3><p>So error measures try to answer the following question.What does it mean for <strong>h to approximate f</strong></p>
+<p>You have two functions.And you say this is a good approximation, this is a bad approximation.Is it a qualitative statement or is it quantitative,It is quantitative.And <strong>because it’s quantitative we are going to define an error measure</strong>.That measure how well or badly h approximates f</p>
+<p>So the error measure will be defined as E of two guys,One of them will be the <strong>target function</strong>,One of them will be a <strong>hypothesis of interest</strong>.If the error is zero, h perfectly reflects f and you’re home free.If there is an error.then maybe you need to look for another h that has smaller error.So that formalizes the question of search of the learning algorithm</p>
+<p>For a pair of functions but it is almost always defined In terms of difference in a particular point.And then you put these points together.So that’s the point wise definition.So in this case you define a small e that goes with the capital E.that also takes two arguments.And these two arguments are the value of h at a particular point.And the value of f at the same point.That makes sense I’m trying to compare functions</p>
+<p><img src="https://files.mdnice.com/user/23843/1a29047a-e2f2-4c8a-a800-f6298108d424.png" alt="****"></p>
+<p><strong>From point wise to overall</strong></p>
+<p>So now let’s move from the point wise,You define it on one point in the space,to define the error function of E on the entire space.</p>
+<p>If you take a single point from your training set,and the average that case will be the simple average,which is 1/N over the sum.So this is indeed consistent with what was thought of as the training error.And if you go back to the binary error which is the funny error,<strong>it’s exactly the frequency of error in the sample</strong></p>
+<p>So now let’s go for the out of sample error.Now in this case the point is a general point in space.So we are labeling it as x in general without the cases,So <strong>it’s could be any point in this space that is picked from the script h</strong>,Script x which is the input space.And in order to get an average, in that case,what you do is you get the <strong>expected value</strong>, in this case with respect to x.So that is the average for the out of sample case.And again if you take the binary error.And you take the expected value of this.This will be identically the probability of error overall</p>
+<p><img src="https://files.mdnice.com/user/23843/08318d17-4900-4118-b179-a37375429fe4.png"></p>
+<p><strong>The error measure</strong></p>
+<p>My example would be <strong>fingerprint verification</strong>.There are two types of error that you can make.One of them is called <strong>false accept</strong>.The other type is <strong>false reject</strong>.<br><img src="https://files.mdnice.com/user/23843/08f16897-136a-47f4-8ee6-feb0178e130a.png"></p>
+<p>The key message I’m conveying with this discussion is that there is no inherent merit to choosing one error function over another,It’s not an <strong>analytic question</strong>; it’s an application <strong>domain question</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/3544831f-89b3-4f58-af01-8d8c2005210a.png"></p>
+<p><img src="https://files.mdnice.com/user/23843/c35d15ee-0db2-4160-bb71-8554d20601f5.png"></p>
+<p>So, the take home lesson is that when you are dealing with a practical learning problem,the error measure should be specified by the user</p>
+<h3 id="3-Noisy-targets"><a href="#3-Noisy-targets" class="headerlink" title="3.Noisy targets"></a>3.Noisy targets</h3><p>The noisy targets are actually very important.Because in reality,these are the only types you are going to encounter in the problems in life.<strong>Very seldom you get a very clean target function.</strong></p>
+<p>So the first statement is the  <strong>target function is not always a function.</strong> Why you calling it target function if it’s not a function.Well function is a mathematical motion you have to return.<strong>A unique value for every point in the domain</strong>.That’s what qualifies it as a function.Where use it here a little bit liberally</p>
+<p>Let’s take an example we started with, <strong>the credit exam</strong>.Isn’t it possible the two identical customers have these fields.And one of them ended up being with good credit.Than one of them ended up being with bad credit.Sure this doesn’t capture all information in the world.<strong>There’s information that is not given that contributes noise</strong>.So we come to realize that two identical customers,In the sense that input presentation is the same.Can have two different behaviors.And having this, make this is one point mapping to two value.So it is not a function</p>
+<p><img src="https://files.mdnice.com/user/23843/ab0bcd60-9785-4ba8-af8e-ed1407bc0b52.png"></p>
+<p><strong>Target distribution</strong></p>
+<p>We use a target distribution as in <strong>probability distribution</strong> instead of having Y equals F of X.<strong>Is probability of Y given X</strong>.So, again it depends on X, but its dependence is probabilistic.Some Y are more likely than in this case.Here one Y was possible and the rest is impossible,So, now we make it a little bit more accommodating.We have a target distribution instead of target functions.</p>
+<p>X use to be generated by the input probability distributions.It will still be generated by this distributions.</p>
+<p>what we change now is that instead of Y,being deterministic over X one generate X,Y is also probabilistic generated by this fellow.So you can think now of X, Y as a pair,Being generated by <strong>joint distribution which of P of X times P of Y given X as you mean independence</strong></p>
+<p>There’s no assumption independent once you put it this way,But the other assumption here is that the P of Y are given is actually a conditional on X.<br><img src="https://files.mdnice.com/user/23843/9303bc57-128f-41dd-bae1-56e32b0f8faa.png"></p>
+<p>Now you have Noisy targets.When a noisy target can be posed as a deterministic target Like the one we had before Plus noise this applies to any numerical target function</p>
+<p>Now let’s do the final installment of the diagram,This will be the general learning diagram for unsupervised learning.The unknown target function became unknown target distribution,This is to accommodate at practical consideration,Which is the fact that we are learning something that is noisy</p>
+<p><img src="https://files.mdnice.com/user/23843/b941ee33-7875-4569-ac60-aacbec697dd1.png"></p>
+<p><strong>Distinction between $P(y|X)  &amp;#8194and  &amp;#8194P(x)$</strong></p>
+<p>Which is a distinction between that two probability we have.We have probability of X.which artificially introduce to accommodate ending.And then this was introduce in a completely different context.As is genuine functions that encounter <strong>in practice Are not function are actually noisy distribution</strong></p>
+<p>This guided passes on the probability of Y given X,This guided passes on the probability of X,<strong>The input distribution is merely playing the role Of quantifying those relative importance of the point X</strong><br><img src="https://files.mdnice.com/user/23843/7833d052-3b03-4d1d-978b-9f400a4b43f6.png"></p>
+<h3 id="4-Preamble-to-the-theory"><a href="#4-Preamble-to-the-theory" class="headerlink" title="4.Preamble to the theory"></a>4.Preamble to the theory</h3><p><img src="https://files.mdnice.com/user/23843/2b6fa603-829e-4022-8c84-90f0529ac0d3.png"></p>
+<p><img src="https://files.mdnice.com/user/23843/05de96de-ba08-482c-a253-1e36d1884456.png"></p>
+<p><img src="https://files.mdnice.com/user/23843/aaff94a2-2881-401f-aecc-0c7056049e6e.png"></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>因为不是所有的特征都在数据样本内，所以数据集中，相同的输入可能会有不一样的输出。未知信息导致了噪音的出现，使得训练过程中相同的输入对应的输出呈现出概率分布而不是一个准确的输出。为了让模型的泛化能力更强，我们用概率分布取代目标函数。</p>
+
                 
             </div>
             <hr/>
@@ -618,7 +678,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/resources/index.html">http://weishicharity.cn/resources/index.html</a>
+                    <a href="http://weishicharity.cn/2022/03/18/learning-from-data-4/">http://weishicharity.cn/2022/03/18/learning-from-data-4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -655,7 +715,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -849,18 +913,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/learning-from-data-3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="learning from data 3">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">learning from data 3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -870,18 +933,29 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -889,16 +963,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/guan-yu-xuan-ze-de-si-kao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -909,7 +983,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
@@ -919,7 +993,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

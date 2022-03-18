@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="resources, 为事事">
-    <meta name="description" content="循迹逻辑与锻炼文笔">
+    <meta name="keywords" content="learning from data 2, 为事事">
+    <meta name="description" content="导言这节课的主题是学习的可行性，涉及到部分数学公式的推导，尤其Hoeffding’s 不等式。首先从摸球的实例出发，介绍了概率与频率的关系，然后把这两者的关系与学习联系起来，赋予了一个新的概念，即模型样本外表现与样本内表现。最后把Hoeff">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>resources | 为事事</title>
+    <title>learning from data 2 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -418,12 +418,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">resources</h1>
+                    <h1 class="description center-align post-title">learning from data 2</h1>
                 </div>
             </div>
         </div>
@@ -537,12 +537,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ml/" class="post-category">
+                                ml
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -551,7 +564,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-17
+                    2022-03-18
                 </div>
                 
 
@@ -565,14 +578,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    11 分
                 </div>
                 
 
@@ -592,7 +605,106 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>这节课的主题是学习的可行性，涉及到部分数学公式的推导，尤其Hoeffding’s 不等式。首先从摸球的实例出发，介绍了概率与频率的关系，然后把这两者的关系与学习联系起来，赋予了一个新的概念，即模型样本外表现与样本内表现。最后把Hoeffding’s 不等式应用到多个假设叠加情况，把模型的复杂程度与不等式联系起来。</p>
+<h2 id="Feasibility-of-learning"><a href="#Feasibility-of-learning" class="headerlink" title="Feasibility of learning"></a>Feasibility of learning</h2><ul>
+<li>Probaility to the rescue</li>
+<li>Connection to learning  </li>
+<li>Connection to real learning </li>
+<li>QA<h3 id="1-Probaility-to-the-rescue"><a href="#1-Probaility-to-the-rescue" class="headerlink" title="1.Probaility to the rescue"></a>1.Probaility to the rescue</h3>we’re going to start with a probabilistic sitation,that is a very simple probabilistic sitation,it doesn’t seem to relate to learning,But it will capture the idea——<strong>can we say something outside the sample data that we have?</strong>(我们能对样本外的情况做出推断吗？) So we’re going to answer it in a way that is concrete,and where the mathematics is very friendly. And then that,i’m going to be able to relate that probabilistic situation as we stated.</li>
+</ul>
+<p><strong>1.1 A related experiment:</strong></p>
+<ul>
+<li><p>consider a <strong>‘bin’</strong> with red and green marbles</p>
+<p> P[picking a red marble] = $\mu$</p>
+<p> P[picking a green marble] = $1-\mu$</p>
+</li>
+<li><p>the value of $\mu$ is unknown to us</p>
+</li>
+<li><p>we pick $N$ marbles to us</p>
+</li>
+<li><p>The fraction of red marbles in sample =     $\nu$<br><img src="https://files.mdnice.com/user/23843/4ff005eb-5df6-4b2c-bc14-7a2e4f211aac.jpg"></p>
+</li>
+</ul>
+<p><strong>1.2 Does  $\nu$  say anything about  $\mu$  :</strong></p>
+<p><strong>NO!</strong></p>
+<p>Sample can be mostly green while bin is mostly red</p>
+<p><strong>Yes!</strong></p>
+<p>Sample frequency $\nu$ is likely close to bin frequency $\mu$(sample is big enough, the sample frequency,while is $\nu$–that is likely to be close to $\mu$)</p>
+<p>In a big sample(large $N$),$\nu$ is probably close to $\mu$(within $\epsilon$)</p>
+<p>Formally,$$$P[| \nu-\mu |&gt;\epsilon]\leqslant e^{-N}$$$</p>
+<p>So if you get a bigger sample,this will be diminishingly small probability.So the probability of something bad happening will be very samll,and we can claims that,indeed, $\nu$ will be within $\epsilon$ from $\mu$, and we will be wrong for a very minute amount of the time.But’s that’s the good news.</p>
+<p>Now the bad news–$$$P[| \nu-\mu |&gt;\epsilon]\leqslant 2e^ {-2{\epsilon^2}N}$$$</p>
+<p>Now that inequality is called <strong>Hoeffding’s Inequality</strong></p>
+<p>In other words, the statement “$\mu=\nu$” is P.A.C(probably,approximately,correct)$$$P[| \nu-\mu |&gt;\epsilon]\leqslant 2e^ {-2{\epsilon^2}N}$$$</p>
+<ul>
+<li><strong>Valid for all $N$ and $\epsilon$</strong></li>
+</ul>
+<p>pick any tolerance you want,and for any number of examples you want,this is true.It’s not an asymptotic result. It’s a result that holds for every N and e</p>
+<ul>
+<li><strong>Bound does not depend on $\mu$</strong></li>
+</ul>
+<p>Regardless of the value of $\mu$ –$\mu$ could be anything between 0 and 1,and this will stil be bounding the deviation of the sample frequency from the real frequency.</p>
+<ul>
+<li><strong>Tradeoff: $N$,$\epsilon$, and the bound.</strong></li>
+</ul>
+<p><strong>The smaller the $\epsilon$ is,the bigger than N you need in order to compensate for it and come up with the same level of probability bound.</strong> If you have more examples, you are more sure that $\nu$ and $\mu$ will be close together,even closer and closer and closer,as you get large N</p>
+<ul>
+<li><strong>$\nu \approx \mu \Rightarrow \mu \approx \nu $</strong></li>
+</ul>
+<p>The only random fellow in this entire operation is $\nu$.Now,the way you are using the inequality is to infer $\mu$, the sample here,from $\nu$.That is not the cause and effect that actually takes place.The cause and effect is that $\mu$ affects $\nu$, not the other way around.But we are using it the other way around.Lucky for us ,the form of the probability is <strong>symmetric</strong>.Therefore, instead of saying that $\nu$ tends to be close to $\mu$,which will be the accurate logical statement –$\mu$ is there,and $\nu$ has a tendency to be close to it.Instead of that,say that i know already $\nu$, and now $\mu$ tends to be close to $\nu$.That’s the logic we are using.</p>
+<h3 id="2-Connection-to-learnning"><a href="#2-Connection-to-learnning" class="headerlink" title="2.Connection to learnning"></a>2.Connection to learnning</h3><p><strong>Bin</strong>: The unknown is a number $\mu$</p>
+<p><strong>Learning</strong>: The unknown is a function $\mathcal{f}$:     $\mathcal{X}$    $\longrightarrow$ $\mathcal{Y}$</p>
+<p>Each marble· is a point $x$$\in$  $\mathcal{X}$</p>
+<p>Hypothesis got it right   $h(x)=f(x)$</p>
+<p>hypothesis got it wrong   $h(x) \neq f(x)$<br><img src="https://files.mdnice.com/user/23843/eb68d82e-2484-49a0-8793-c94d37221033.jpg"></p>
+<p>There are green marble,and they correspond to something learning problem.They correspond to your hypothesis getting it right.The hypothesis is a full function,like the target function is.you can compare the hypoyhesis to the target function on every point.And they either agree or disagree.</p>
+<p><strong>Are we done?</strong></p>
+<p>Not so Fast!$h$ is fixed.</p>
+<p>For this $h$,$\nu$ generalizes to $\mu$.</p>
+<p><strong>‘Verification’</strong> of $h$, not <strong>learning</strong></p>
+<p>No guarantee $\nu$ will be small.</p>
+<p>We need to choose from multipt $h’s$(going to go for the sample,so to speak,generated by every hypothesis,and then you pick hypothesis that is most favorable,that gives you the least error)</p>
+<p>Maybe i can have more than one bin,to accommodate the situation where i have more i have hypothesis.<br><img src="https://files.mdnice.com/user/23843/8479b598-5f11-45e8-bea7-de6dd438802d.jpg"></p>
+<p><strong>Multiple bins</strong></p>
+<p>Generalizing the bin model to more than one hypothesis</p>
+<p><strong>Notation for learning</strong></p>
+<p>Both $\mu$ and $\nu$ depend on which hypothesis $h$</p>
+<p>$\nu$ is ‘<strong>in sample</strong>‘ denoted by $E_{in}(h)$</p>
+<p>(in sample performance)</p>
+<p>$\mu$ is ‘<strong>out of sample</strong>‘ denoted by $E_{out}$(h)</p>
+<p>(out of sample performance)<br><img src="https://files.mdnice.com/user/23843/53b94061-1d42-4d84-9cbe-c4959e935ffe.jpg"></p>
+<p>The Hoeffding inequality becomes:$$P[| E_{in}(h)-E_{out}(h) |&gt;\epsilon]\leqslant 2e^ {-2{\epsilon^2}N}$$</p>
+<p><img src="https://files.mdnice.com/user/23843/09674c3c-04c6-4bc4-9d24-fe9b48edd166.jpg"></p>
+<h3 id="3-Connection-to-real-learnning"><a href="#3-Connection-to-real-learnning" class="headerlink" title="3.Connection to real learnning"></a>3.Connection to real learnning</h3><p><strong>Are we done already</strong></p>
+<p>Not so fast!! Hoeffding doesn’t apply to multiple bins.</p>
+<p>Hoeffding inequality–if you have one experiment, it has a guarantee.the guarantee gets terribly diluted as you go,and we want to know exactlt how the dilution goes.</p>
+<p><strong>A simple solution</strong></p>
+<p>$$<br>P[| E_{in}(g)-E_{out}(g) |&gt;\epsilon]\leqslant P[| E_{in}(h_1)-E_{out}(h_2) |&gt;\epsilon<br>$$</p>
+<center>or$[\| E_{in}(h_1)-E_{out}(h_1) \|&gt;\epsilon$</center><center>or$[\| E_{in}(h_2)-E_{out}(h_2) \|&gt;\epsilon $</center><center>or$[\| E_{in}(h_M)-E_{out}(h_M) \|&gt;\epsilon ]$</center><center>
+
+<p>$$<br>\leqslant \sum_{m=1}^{M}P[| E_{in}(h_m)-E_{out}(h_m) |&gt;\epsilon ]$$</p></center><br>$$<p></p>
+<p><strong>The final verdict</strong><br>$$<br>P[| E_{in}(g)-E_{out}(g) |&gt;\epsilon]<br>$$</p>
+<p>$$\leqslant P[| E_{in}(h_1)-E_{out}(h_2) |&gt;\epsilon]$$$$\leqslant \sum_{m=1}^{M} 2e^ {-2{\epsilon^2}N}$$$$P[| E_{in}(g)-E_{out}(g) |&gt;\epsilon] \leqslant 2Me^ {-2{\epsilon^2}N}$$</p>
+<p>Now you see what the problems is.And the problem is extremely intuitive.The chances are you will memorize in-sample,and you not going to really generalize well out-of -sample,becauese you have so many parameters to work with.</p>
+<p>if you have a more sophisticated model–M is huge,let alone infinite–you loss the link the between the in-sample and the out-of-sample. </p>
+<h3 id="4-QA"><a href="#4-QA" class="headerlink" title="4.QA"></a>4.QA</h3><p><strong>Q:what happens when the Hoeffding inequality give you something trivial,like less tha 2 ?</strong></p>
+<p>Well, it means that either the resources of the examples you have,the amount of data you have,is not sufficient to guarantee any generalization,or that your tolerance is too stringent. </p>
+<p><strong>Q:the implication of $\nu$ equals $\mu$ and vice versa ?</strong></p>
+<p>It’s a subtle point, and it’s common between <strong>machine learning and statistics</strong>. what do you do in statistics?what is the cause and effect for a probability and a sample? the probability results a sample. Now, what you do in statistics in the reverse of that.you already have the sample, and you are trying to infer which probability gave rise to it.So you are using the effect to decide the cause rather than the other way around.So the same here.The bin is the cause. The frequency in the sample is the effect.In terms of learning, is that i look at the sample and infer the bin.So i infer the cause based on the effect.</p>
+<p><strong>Q:How do you pick g ?</strong></p>
+<p>We have one way of picking g–that already was established last time–which is perceptron learning algorithm.So your hypothesis set is H.It has a bunch of h’s,which are the diffcult lines in the plane.And you pick g by applying the PLA,the perceptron learning algorithm,playing around with the boundary,according to the update rule.finally get g,So g is just a matter of notation, a name for whichever one settle on,the finall hypothesis,<strong>How you pick g depends on what algorithm you use,and what hypothesis set you use.So it depends on the learning model,and obviously on the data.</strong></p>
+<p><strong>Q:Why are there are multiple bins ?</strong></p>
+<p>The bin was only our conceptual tool to argue that learning is feasible in a probabilistic sense.you need multiple bins to represent multiple hypothesis</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>接下来对本节课做一个总结、提一下自己的想法。</p>
+<p><strong>1</strong>.第二节课重点介绍了Hoeffding不等式,并从单次实验推广到多次实验(我理解的实验指的是不同的Hypothesis即假设函数)。Hoeffding不等式定义了泛化误差的上界，在误差允许的范围内（误差指的是我们能忍受的或者实际工程需求能接受的一个值）只要样本够大，那么$\nu$就会无限接近$\mu$，换一个说法就是模型的样本内表现会接近模型的样本外表现，简单一点就是模型的泛化能力会随着样本的增多而变强。后面Hoeffding不等式推广到累加假设函数，这里的累加指的是模型的复杂性增加。但增加模型的复杂性并不代表模型的泛化能力会增强。它可能会倾向于记住训练样本，而丢失样本内与样本外的链接。</p>
+<p><strong>2</strong>.为什么说这个 <strong>$\nu \approx \mu \Rightarrow \mu \approx \nu $</strong> 具有对称性呢。先看看这个公式</p>
+<p>$$<br>P[| \nu-\mu |&gt;\epsilon]\leqslant 2e^ {-2{\epsilon^2}N}<br>$$</p>
+<p>$\mu$是未知的、固定的，我们的目的是通过不断采样让$\nu$逼近$\mu$.$\mu$是因，$\nu$是果。那么从公式上来看，并没有真正的因果，既可以说$\nu$逼近$\mu$，也可以说$\mu$逼近$\nu$.两者是等价的。有那么一点点薛定谔的猫的意思哈，没观察之前永远不知道盒子里面的情况。</p>
+<p>再多说一点，$\mu$等同于”命”，$\nu$等同于”运”。前者是注定的，但后者其实是可以改变的，怎么改变呢？还是”Sample”即采样，从哪里采样呢？肯定是去现实生活中采样，通过现实世界的不断反馈、试错，从而改变自己的”最佳假设”，以此拟合”目标函数”。</p>
+<p>接着说一下我们该不该算命，首先说我的观点：不建议。算命的本质是不通过采样就提前知道部分$\mu$，也就是说假设函数变少了，人生这个大模型需要调节的参数变少了。先看看公式：$$P[| E_{in}(g)-E_{out}(g) |&gt;\epsilon] \leqslant 2Me^ {-2{\epsilon^2}N}$$<br>如果$$$M$$$变少，为了补偿不等式右边这一块。那么$$$\epsilon$$$势必就要变小，即忍受的界限会变小。这样的话，知命的人会可能会趋向于两个情况：一部分活得小心翼翼，一部分直接摆烂。这样别说改运了，命可能都会变差。</p>
+<p>最后贴一下最近在抖音看到的一条文案，比较符合这节课的主题：</p>
+<p>得到未必是福，失去未必是祸，人生各有渡口，各有各舟。有缘躲不开，无缘碰不到，缘起则聚，缘尽则散。</p>
+
                 
             </div>
             <hr/>
@@ -618,7 +730,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/resources/index.html">http://weishicharity.cn/resources/index.html</a>
+                    <a href="http://weishicharity.cn/2022/03/18/learning-from-data-2/">http://weishicharity.cn/2022/03/18/learning-from-data-2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -655,7 +767,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -849,18 +965,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/guan-yu-xiao-zu-zuo-ye-de-si-kao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="关于小组作业的思考">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">关于小组作业的思考</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -870,18 +985,29 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -889,16 +1015,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/learning-from-data-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="learning from data 1">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">learning from data 1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -909,17 +1035,28 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

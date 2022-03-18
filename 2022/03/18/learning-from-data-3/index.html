@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="resources, 为事事">
-    <meta name="description" content="循迹逻辑与锻炼文笔">
+    <meta name="keywords" content="learning from data 3, 为事事">
+    <meta name="description" content="导言这节课主题是线性回归算法模型，主要内容有：1.根据先验知识降低输入的复杂性，用低维的向量表示高维的信息2.线性分类，分别介绍了感知机和感知机的口袋算法3.线性回归，仍然以信贷审批的实例为出发点，用数学公式推导出权重应该如何更新。4.输入">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>resources | 为事事</title>
+    <title>learning from data 3 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -418,12 +418,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">resources</h1>
+                    <h1 class="description center-align post-title">learning from data 3</h1>
                 </div>
             </div>
         </div>
@@ -537,12 +537,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ml/" class="post-category">
+                                ml
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -551,7 +564,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-17
+                    2022-03-18
                 </div>
                 
 
@@ -565,14 +578,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    13 分
                 </div>
                 
 
@@ -592,7 +605,78 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>这节课主题是线性回归算法模型，主要内容有：1.根据先验知识降低输入的复杂性，用低维的向量表示高维的信息2.线性分类，分别介绍了感知机和感知机的口袋算法3.线性回归，仍然以信贷审批的实例为出发点，用数学公式推导出权重应该如何更新。4.输入数据的非线性变换，线性的本质在于权重而不是数据。</p>
+<h2 id="The-Linear-Model"><a href="#The-Linear-Model" class="headerlink" title="The Linear Model"></a>The Linear Model</h2><ul>
+<li>Input representation</li>
+<li>Linear Classification </li>
+<li>Linear Regression</li>
+<li>Nonlinear Transformation<h3 id="1-Input-representation"><a href="#1-Input-representation" class="headerlink" title="1.Input representation"></a>1.Input representation</h3>So if you take this raw input(18pixels * 18pixels) and try the perceptron directly on it,you realize that the linear model in this case,which has a bunch of parameters has really just too many parameters.Okay, it has 257 parameters.If you are working in a 257 dimensional space，that is a huge space; so the idea of <strong>input representation，is to simplify the algorithm’s life.</strong> we know that it is <strong>not really the individual pixels that matter and what not</strong>.You can probably extract some features from the inputs，and then give those to the learning algorithm，What are features?<strong>It is higher level of representation of the raw information there.</strong><img src="https://files.mdnice.com/user/23843/2c762edf-998f-410f-b89b-2134f7b89b96.jpg"></li>
+</ul>
+<p>Now x1 is the <strong>intensity</strong> ,x 2 is the <strong>symmetry</strong>.this is a pretty good representation of the input,as far as the learning algorithm is concerned;you went from 257 dimensional to 3 dimensional.</p>
+<p><strong>Illustration of features</strong></p>
+<p>Okay, you have these as your inputs,and x1 is the intensity x 2 is the symmetry.What does it look like?They look like this.</p>
+<p>So, this is a scattered diagram, every point here is a data point.and I am taking the simple case,So, I am only taking digits that are 1’s or 5’s,so, when you put all the 1’s,and all the 5’s in a scattered diagram,you realized for example, that the intensity on the 5,is usually more than the intensity on the 1’s.Okay, there are more pixels occupied by the 5’s than the 1’s.So, this is the coordinate which is the intensity.<br>!<img src="https://files.mdnice.com/user/23843/f0383d1b-8a64-4bbd-b285-b3ba62d15151.jpg"></p>
+<p>If you look at the other coordinate, which is symmetry.The 1 is often more symmetric than the 5.Therefore, the guys that happened to be the 1’s that are the blue,tend to be more higher on the vertical coordinate, okay,and just by these 2 coordinates.you already see that this is almost linearly separable not quite.Okay, so, this is what the features look like.</p>
+<h3 id="2-Linear-Classification"><a href="#2-Linear-Classification" class="headerlink" title="2.Linear Classification"></a>2.Linear Classification</h3><p><strong>What PLA does</strong></p>
+<p>And in this case, you find that $E_{out}$,actually tracks the $E_{in}$ pretty well.When this goes down, this goes down,and when this goes up, this goes up.So, if you make your decision based on $E_{in}$ the decision,based on $E_{out}$ will also be good;that is good for generalization<br><img src="https://files.mdnice.com/user/23843/91a63b63-1e05-425e-bac7-bb84511ba253.jpg"></p>
+<p>Okay, now what does the final boundary looked like.Eventually, you end up with the hypothesis.this is your boundary.This is the final hypothesis.Well, it’s okay but definitely not good.It is too deep into the blue region.</p>
+<p><strong>The ‘pocket’ algorithm</strong></p>
+<p>So, now, we go and try to modify the perceptron learning algorithm in a very simple way that is the simplest modification you can ever imagine.</p>
+<p>This is what the PLA did right? and when we looked at it,we said okay if we only could keep this value,well this value is not a mystery.You can measure it explicitly.It is $E_{in}$ sample error,and you know that it’s better than the value you ended up with.<img src="https://files.mdnice.com/user/23843/22fd2249-2b45-402d-81f8-0824791a69d8.jpg"></p>
+<p>You keep this guy and report it as the final hypothesis.What an ingenious idea, okay.Now, the reason the algorithm is called the pocket algorithm,because the whole idea is to put the best solution so far in your pocket, okay.And when you get a better one,you take the better one put it in your pocket and throw the old one,you can use perceptron learning algorithm with non separable data,<strong>terminated by force at some iteration,and that would be your pocket algorithm, okay.</strong></p>
+<p><strong>Classification boundary - PLA versus Pocket</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/f8a0dc0d-5d60-4523-a557-b4339014ee6f.jpg"></p>
+<p>It actually does what we thought it would do.It separates them better, okay;still obviously it cannot the separate them perfectly; nothing can because they are not linearly separable.So, with this very simple algorithm,you can actually deal with general inseparable data</p>
+<h3 id="3-Linear-Regression"><a href="#3-Linear-Regression" class="headerlink" title="3.Linear Regression"></a>3.Linear Regression</h3><p>Okay, the word regression simply means a <strong>real valued output</strong>.There is no absolutely no other connotation to it.It is glorified way of saying my output is a real valued,Now, linear regression is used incredibly often in statistics and economics.Every time, you say are these variables related to that variable;the first things that comes to mind is linear regression.</p>
+<p><strong>credit again</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/13225290-b731-4d74-adea-6fb7bedbc09a.jpg"></p>
+<p>In the case of regression, we will have real valued function.And the interpretation in this case is that you are trying to predict the proper credit line for a customer.So, the customer applied,and it’s not a question of approving the credit or not,this is a real valued function.</p>
+<p><strong>The data set</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/c5133e23-f6c7-48b1-bd8a-640aca937618.jpg"></p>
+<p>Okay, so, the historical data here are again examples from previous customers and the previous customer,this x1 and this is y1,so this is the application that the customer gave,and this is the credit line that was given to them, okay.</p>
+<p><strong>How to measure the error</strong></p>
+<p>You will have an algorithm that tries to find the optimal weights.These are the weights you are going to have,.So, these weights are going to determine what hypothesis you get.<strong>We would like to quantify that to give guidance to the algorithm,in order to move from one hypothesis to another.</strong> </p>
+<p>So, we will define an error measure,and the algorithms will try to minimize the error,measured by moving from one hypothesis to the next.</p>
+<p>And you define it by simple squared error.Now, okay squared error does not have a inherit merit here,<strong>it just happens to be the standard error function use with linear regression</strong>.It’s merit really is the simplicity in the analytic solution we’re going to get.<br><img src="https://files.mdnice.com/user/23843/387cb1db-1875-4afe-a84f-948e2c90e9ae.jpg"></p>
+<p>So in the particular example, small n to capital N,for each example this is the contribution of the error.Each of this is affected by the same w because h depends on w.So as you change w, this value will change for every example,and this is the error for that example,and if you want to get the in sample error,you will simply take the average of those, okay.</p>
+<p><strong>Illustration of linear regression</strong></p>
+<p>the error in the first example, the error in the 2nd example,and if you sum up the squares of the length of these bars,that is what we call <strong>in sample error</strong>.</p>
+<p><img src="https://files.mdnice.com/user/23843/b83efb7a-bb08-4b2d-8a01-4d479f04d967.jpg"></p>
+<p>Well linear regression can apply to more than one dimension,and you know, I can plot 2 dimensions here to just illustrate it,the same principle, We have x1 and x2 and in this case,the linear thing is really a plane.<strong>When you go to higher dimension space,the line which is the reason, is not really a line but a hyper clip,one dimension short of what you are working with</strong> </p>
+<p><strong>The expression for $E_{in}$</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/c63b7eab-7376-4f10-b57c-335cfe9610e0.jpg"></p>
+<p>Summing up contributions from the different components，and each component happened to be the exactly what you are having here.So this becomes a short hand for writing this expression.</p>
+<p><strong>Minimizing  $E_{in}$</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/209162fd-044b-4f65-baf1-f284a7ee18fe.jpg"></p>
+<p><strong>The linear regression algorithm</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/95b13392-f741-4615-a6cb-4aa1bba67b50.jpg"></p>
+<p><strong>linear regression for classification</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/4dd18c7a-9b7d-4291-8cad-eb171bc9ff20.jpg"></p>
+<p><img src="https://files.mdnice.com/user/23843/d0fd9aec-46e3-4e8d-b725-f3895d01bba1.jpg"></p>
+<h3 id="4-Nonlinear-Transformation"><a href="#4-Nonlinear-Transformation" class="headerlink" title="4.Nonlinear Transformation"></a>4.Nonlinear Transformation</h3><p><strong>linear is limited</strong><br><img src="https://files.mdnice.com/user/23843/a6997ee1-7cbd-4c89-9ed2-6f21450cfcb3.jpg"></p>
+<p>Something that may look like this. So you want to classify this as +1’s and -1’s.Now I can put the line anywhere and obviously I’m in trouble,because this is not linear separable by long shots.Yes, We do not have the tools to deal with that yet.</p>
+<p><strong>Linear in what</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/78fa345d-2439-41df-8663-3ff3d7ba1a48.jpg"></p>
+<p>Now this you would think are called linear,because they are linear in the x’s which are linear.I get this inputs and combine them linearly,and I get my surface that’s why I am calling it linear.However you realize that more importantly,these guys are linear in w.</p>
+<p>Now when you go to the definition of function to learning,the roles are reverse, the inputs which are supposed to be the variable,when you evaluate a function are now constants.They are dictated by the training set.They are a bunch of numbers someone gave me.The real variable as far as I’m concern are the indicators.The fact that they are linear in the parameter is what matters,in the arriving the preceptor in algorithms and the linear regression algorithms.</p>
+<p>If you go back to the derivation,it didn’t matter where the x’s were sitting there as constants,and definite linearity is what enables the derivation.So that results in algorithms work.</p>
+<p>Now I can take the inputs as constants, someone gave me data,and I can do nonlinear transformation to that data.When I learn to transform nonlinear data,I am still in the more realm move data,because the weights that will be given to the nonlinear features will have a linear dependency.</p>
+<p><strong>Transform the data nonlinearly</strong></p>
+<p><img src="https://files.mdnice.com/user/23843/dc3fffe9-9bf5-4fd5-975b-435f0611b5f7.jpg"><br>Now I’m going to take a transformation.I’m going to call it pi.Every point in that space, I’m going to transform to another space,and my formula for transformation will be this.I’m assuming here that the origin of the coordinate system is here,so I am taking x1 squared and you can see where I am leading,because now I am measuring distances from the origin,and that seems a helpful guide here.Now in doing this, all I did was take constants and produce all other constants, okay.Now you can look at these,and you can say that this is my training data.I take your original training data and do the transformation</p>
+<h3 id="5-QA"><a href="#5-QA" class="headerlink" title="5.QA"></a>5.QA</h3><p><strong>Q:how to figure out in a systematic way the linear transformation instead of computate?</strong></p>
+<p>A:I said in a linear transformation is a loaded question.And there are 2 steps in dealing with it.I will talk about it elaborately in the beginning of next lecture,and we are going to talk about the guidelines for choice,what you can do and what you cannot do after we develop the theory of generalization</p>
+<p><strong>Q:how do you usually come up with the features?</strong></p>
+<p>A:The best approach is to look at the raw input,then look at the problem statement and then try to infer what would be a meaningful feature for this problem.</p>
+<p>There is no general algorithm for getting features.So this is the part where you work with the problem,and you try to represent the input in a better way.</p>
+<p>the bottom line is that if you don’t look at the data,and you study the problem, and derives features based on that,that will almost always be helpful,if you don’t have too many of them.If you have too many of them, it will become a mega problem.</p>
+<p><strong>Q:So a short clarification, so the nonlinear transformation states that,they may become features.</strong></p>
+<p>A:Yeah, the word feature we are going to use which was called z,and anything that you take may become input,and transform it into something else will be called feature,and features of feature will become also to be feature, okay.</p>
+<p>So if you take for example the classification of digits，we have the pixel values, zero input.Then we have the symmetry and the intensity, those are features.If you go further and find nonlinear transformation of those,these will also be called features.A feature is any higher representation of a raw input.</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>接下来对本节课做一个总结、提一下自己的想法。</p>
+<p>为什么上文说到有些数据是线性不可分？因为对输入数据做特征表示依靠的是人的先验知识，先验是主观的，把人的先验知识应用到算法中并不能让机器完全让数据线性可分。要想线性可分，还需要增加更多的先验或者让机器自己去寻’先验’。所以并不是数据不可线性可分，而是维度不够。</p>
+<p>关于最后的非线性变化，为什么非线性的数据平方以后就能线性可分呢？其本质是数据经过变化后升维了。想象有1张纸，四个角是红点，中间是一堆绿点。如果把这张纸放在$x,y$坐标系，那红点、绿地无论如何都是线性不可分的。但是把这张纸稍微弯曲折叠起来，再放到$x,y,z$坐标系，可以发现此时的数据又是线性可分了。只不过现在是用一个面区分数据，之前用一条线区分数据。</p>
+<p>所以说看事情的角度还得是从全局出发，抽离于当下拘泥的维度，从更高的视角看待当下的情况，可能会更容易找到最优解，但是代价也很大。当然也有可能穷极一生都找不到全局最优，能找到局部最优解、混口饭吃已经很不错了。</p>
+
                 
             </div>
             <hr/>
@@ -618,7 +702,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/resources/index.html">http://weishicharity.cn/resources/index.html</a>
+                    <a href="http://weishicharity.cn/2022/03/18/learning-from-data-3/">http://weishicharity.cn/2022/03/18/learning-from-data-3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -655,7 +739,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -849,18 +937,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/learning-from-data-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="learning from data 1">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">learning from data 1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -870,18 +957,29 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -889,16 +987,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/resources/index.html">
+                <a href="/2022/03/18/learning-from-data-4/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="resources">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="learning from data 4">
                         
-                        <span class="card-title">resources</span>
+                        <span class="card-title">learning from data 4</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -909,17 +1007,28 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
