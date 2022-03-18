@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="关于在假设空间中搜索最佳假设的思考, 为事事">
-    <meta name="description" content="放假期间沉迷于奶头乐，许久未有深度思考，今天动动笔，循迹一下逻辑。以机器学习为引，进而管中窥豹抒发一点关于人生的愚见。
-今天要说的内容与机器学习里面的基本术语假设空间有关，在这之前，得先说说机器学习与归纳学习。机器学习简而言之就是让机器具备">
+    <meta name="keywords" content="自学DL的思考, 为事事">
+    <meta name="description" content="因为课题的关系接触到“深度学习”这个概念，断断续续学了快半年，自学的过程中有了不少感悟与思考。本文最初写于去年8月末，最初是给老师看的一个研一总结，现在随着学习的深入、对一些概念有了一些新的理解，所以不断的在往里面加东西，角度从本专业（园林">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>关于在假设空间中搜索最佳假设的思考 | 为事事</title>
+    <title>自学DL的思考 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -419,12 +418,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">关于在假设空间中搜索最佳假设的思考</h1>
+                    <h1 class="description center-align post-title">自学DL的思考</h1>
                 </div>
             </div>
         </div>
@@ -552,8 +551,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
-                                生活
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                学习
                             </a>
                         
                     </div>
@@ -579,14 +578,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    4.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    15 分
                 </div>
                 
 
@@ -606,32 +605,57 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>放假期间沉迷于奶头乐，许久未有深度思考，今天动动笔，循迹一下逻辑。以机器学习为引，进而管中窥豹抒发一点关于人生的愚见。</p>
-<p>今天要说的内容与机器学习里面的基本术语<strong>假设空间</strong>有关，在这之前，得先说说<strong>机器学习与归纳学习</strong>。机器学习简而言之就是让机器具备找一个函数的能力，是人工智能学科的一个子问题，是归纳学习的一类特殊问题。那什么是归纳学习呢？<br><img src="/images/1.png"></p>
-<p><strong>归纳</strong>（induction）与<strong>演绎</strong>（deduction）是科学推理的两大基本手段。前者是从特殊到一般的<strong>泛化</strong>（generalization）过程，即从具体的事实归结出一般性规律；后者则是从一般到特殊的特化（specialization）过程，即从基础原理推演出具体情况。例如，在数学公理系统中，基于一组公理和推理规则推导出与之相洽的定理，这是演绎；而<strong>从样例中学习</strong>显然是一个归纳的过程，是一个从数据与经验中归纳抽取一般的判定规则与模式的过程，简言之就是你的大脑在不断地归纳、总结最后得到一般规律的过程，因此亦称<strong>归纳学习</strong>。</p>
-<p>其实呢我个人觉得所谓归纳与演绎本质上都是从<strong>认识论</strong>中<strong>经验主义</strong>与<strong>理性主义</strong>发展延伸过来的。小孩子从刚出生一张白纸到能正确分辨出猫猫狗狗基于父母的正确引导；牛顿被苹果砸了一下从而演绎、推导出力学三大定律。</p>
-<p>我们可以把学习过程看做一个在所有假设（hypothesis）组成的空间中进行搜索的过程，搜索目标是找到与训练集匹配（fit）的假设。</p>
-<p>举个例子吧，很大父母都会给给宝宝买一些认知书什么的启蒙读物，里面都是一些很简单的动物、水果等认知图片，这也就是<strong>训练集</strong>。宝宝们通过图片数据归纳出猫猫狗狗的外形特征，从而在现实生活中遇到真实的猫猫狗狗也能分辨出，这就是<strong>泛化</strong>（generalization）过程。然而在遇到一些猫科、犬科的动物时，比如猞猁、老虎、狼等动物时，由于外形相似，宝宝们也会误以为是猫猫狗狗。<br><img src="/images/3.png"></p>
-<p>为什么呢？可能是训练集（认知图片）所含数据太少，宝宝们在认知过程中形成的<strong>假设空间</strong>参数太少（比如只能识别鼻子、爪子、花纹、眼睛等特征）、也有可能是父母的教导方式不对、当然也有可能是个人的认知水平差异造成的。我们只讨论第一种情况，即假设空间参数太少并不能得到最优假设，那么怎样才能得到最优假设呢？其实最简单的办法就是增加训练集，不仅仅是多买几本画册，还可以通过语音、视频等<strong>高维度的媒介</strong>得到更高维的特征，比如（行走的姿态、叫声等）。这样，宝宝们的假设空间会变得更大，也会一步步向<strong>最优假设</strong>靠近。</p>
-<p>概念应该是大致讲清楚了，接下来说说我的思考吧。</p>
-<p>很多鸡汤都说要<strong>拓宽人生的宽度</strong>，那么为什么呢？其实这和上文讲到的假设空间是一个道理。<strong>学习一种乐器、掌握一门语言、熟练使用一个软件</strong>本质上都是增加我们一生要寻求的<strong>最优假设</strong>容量，<strong>假设空间太小</strong>势必会造成对训练集的<strong>过拟合</strong>以及对<strong>测试集</strong>的欠拟合。举一个网上找到的例子吧。</p>
-<p>15岁觉得游泳难，放弃游泳，到18岁遇到一个你喜欢的人约你去游泳，你只好说“我不会耶”。</p>
-<p>18岁觉得英文难，放弃英文，28岁出现一个很棒但要会英文的工作，你只好说“我不会耶”。</p>
-<p>人生前期越嫌麻烦，越懒得学，后来就越可能错过让你动心的人和事，错过新风景。</p>
-<p>虽然是个段子，其实讲述的道理是很深刻的。人嘛，其实就应该去干自己害怕的事儿，跳出自己的舒适圈，多方面的培养自己能力。</p>
-<p>上知乎随便打开一篇鸡汤文章。里面或多或少会提到一些钝感力、逆商力、不要脸的能力等，其实都总结归纳的特别好，培养这些能力实质上就是在拓宽人生的宽度。就像神经网络一样，没有宽度，只有深度的话，再长的神经网络提取到的特征也仅仅是特征的特征，对模型的拟合能力没有质的提升。</p>
-<p>有人说人的一生就是在不停的做选择，我对这句话深以为然。</p>
-<p><strong>这份工作虽然稳定但浑浑噩噩一眼望到底，我想辞职去考研感受另外的人生。辞不辞呢？</strong></p>
-<p><strong>基金股票大跌10个点准备割肉，想想可能马上就涨起来了，还是算了。</strong></p>
-<p><strong>明明知道自己的另一半不爱你，但是想想算了，已经在一起不如将就一下。</strong></p>
-<p>…………</p>
-<p>人的一生总是面临着很多选择，小到中午吃什么，大到求学、谈婚论嫁。当面临选择的时候，很多人会有选择困难症，从而将选择的权利交给别人。其实这说明现在的我们已经大概率陷入死局了，明明知道继续下去是一个不好的结局，还一个个的排着队往下跳。<br><img src="/images/2.png"></p>
-<p>学会<strong>及时止损</strong>、敢于<strong>脱先</strong>是一种非常重要又很难实际运用的能力。不要总是被当前的困难和波折拦下脚步，很多你认为当前过不去的坎，其实回过头看，只是人生中很小的一个波折，与其苦苦搏斗，不如去寻找自己的人生全局最优。并不是说考研、割肉、分手一定是正确的选择，而是在寻找<strong>最优假设</strong>的过程中，在遇到参数迟迟不能更新、模型拟合能力<strong>停滞</strong>甚至下降的时候，如果不采取行动，就会一直陷入当下的死局，与其陷入当下的死局。不如<strong>及时抽身</strong>，去寻找自己的全局最优。</p>
-<h3 id="写在后面的话："><a href="#写在后面的话：" class="headerlink" title="写在后面的话："></a>写在后面的话：</h3><p>中华民族是一个善于运用辩证思维的民族。当面临择业的时候古人云：<strong>忠臣不事二主</strong>，古人又云：<strong>识时务者为俊杰</strong>；在面临创业的时候，古人云：<strong>小心驶得万年船</strong>，古人又云：<strong>撑死胆大的，饿死胆小的</strong>；在面临审判他人的时候，古人云：<strong>得饶人处且饶人</strong>，古人又云：<strong>纵虎归山，后患无穷</strong>。其实古人说的都没错，不同的语境下看似截然相反的言论其实都<strong>指向最优解</strong>。可我觉得这个世界并不是一个简单的<strong>二元分布</strong>，更像是一个复杂的<strong>概率分布</strong>，正是因为这个世界是一个概率分布才让我们身边充满了那么多<strong>不确定性</strong>。所以说本文想要传达的思想并不适用于所有人，具体问题需要具体分析，每个人想要寻求的<strong>最优假设</strong>都不一样，有可能我们穷极一生都找不到最优假设也有可能<strong>当下</strong>就是我们的最优假设。</p>
-<p><strong>参考资料：</strong></p>
-<p>【1】<a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/index.php">https://speech.ee.ntu.edu.tw/~hylee/index.php</a></p>
-<p>【2】<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26708119/">https://book.douban.com/subject/26708119/</a></p>
-<p>【3】<a target="_blank" rel="noopener" href="https://www.douyin.com/video/6971746519246540072">https://www.douyin.com/video/6971746519246540072</a></p>
+                <p><strong>因为课题的关系接触到“深度学习”这个概念，断断续续学了快半年，自学的过程中有了不少感悟与思考。本文最初写于去年8月末，最初是给老师看的一个研一总结，现在随着学习的深入、对一些概念有了一些新的理解，所以不断的在往里面加东西，角度从本专业（园林）出发，写的不对，冒犯之处，敬请谅解。</strong></p>
+<h3 id="数理逻辑与机器学习（基于规则-amp-基于统计）："><a href="#数理逻辑与机器学习（基于规则-amp-基于统计）：" class="headerlink" title="数理逻辑与机器学习（基于规则&amp;基于统计）："></a>数理逻辑与机器学习（基于规则&amp;基于统计）：</h3><p><strong>机器学习的角度：</strong></p>
+<p>现实生活中，我们会碰到两类问题，第一类问题，是基于给定的输入，我们能直接设计出一种程序，把目标映射为想要的输出。第二类问题，我们无法想象出这样一种程序，只能从大量的数据中获取知识，而这个获取知识的过程，就叫做机器学习。</p>
+<p><strong>认识论角度：</strong></p>
+<p>认识论分为<strong>经验主义</strong>和<strong>理性主义</strong>两个阵营。<br>经验主义认为所有的知识都来自于感受和经验，通过大量的观察与实践提高人对某一事物的认识。（小孩是一张白纸）</p>
+<p>理性主义认为世界存在一个绝对的宇宙真理，人天生就具有绝对的理性，我们对事物的认识和得出的结论是基于人自带的先天理性。现在发现的知识是通过人类的演绎得出，没有发现的知识则以潜在的形式藏于心中。（苹果砸牛顿）</p>
+<p><strong>反思：</strong> </p>
+<p>基于规则和基于统计衍生出来的建筑生成设计主要分为两个阵营，一个侧重于逻辑运算，一个侧重于经验知识。小库科技、东南大学李飚团队、NCF参数化设计属于前者，ArchiGAN/SchoolGAN以及各种模型属于后者。<strong>经验派</strong>不关注过程（也暂时搞不清楚过程），只需要结果，所以方法比较简单，但是要大量数据和庞大的算力作为支撑，一句话概述之就是“大力出奇迹”。<strong>理性派</strong>需要搞清楚整个过程的逻辑，每一步都要经得起推敲与验证，需要完备的理论知识作为支撑。目前经验派占据主流机器学习，经验派与理性派的矛盾与联系本质上就是人类逐渐认识世界的过程，学习机器学习就是认识世界。</p>
+<h3 id="为什么要划分训练集、测试集："><a href="#为什么要划分训练集、测试集：" class="headerlink" title="为什么要划分训练集、测试集："></a>为什么要划分训练集、测试集：</h3><p><strong>机器学习的角度：</strong><br>我们把学习器的实际预测输出与样本的真实输出之间的差异称为“误差”（error），学习器在训练集上的误差称为“训练误差”（training error）或“经验误差”（empirical error），在新样本上的误差称为“泛化误差”（generalization error）</p>
+<p>我们的目的是获得在新样本上能表现很好的学习器，所以我们要单独划分出“测试集”来测试学习器对新样本的判别能力，然后以测试集上的“测试误差”（testing error）作为泛化误差的近似。</p>
+<p><strong>实践论的角度：</strong><br><strong>认识从实践始，经过从实践得到了理论的认识，还需再回到实践去。</strong> 理论的东西之是否符合于客观真理性这个问题，由感性到理性之认识运动中是没有完全解决的，也不能完全解决。要完全地解决这个问题，只有把理性的认识再回到实践中去，应用理论于实践，看它是否能够达到预想的目的。综上所述，我们的最终目的是追求模型的泛化能力，为了得到泛化能力更好的模型，我们必须划分训练集与测试集。</p>
+<p><strong>反思：</strong><br>从数据到知识再把知识转换到自己的知识即 <strong>知识输入—知识输出</strong>，是一个从实践中来到实践中去的过程。这其实和人的学习过程相似，我们平常一般只做到第一步，而忽视了第二步。这样只能应付短时间的考试或检测。要保证长期的记住知识，必须输出知识，比如B站的UP主刻意的录一些关于自己学科的视频、写技术博客、开公众号讲故事等，本质上是在做知识输出这一过程，我也打算做点这种事情，所以有了这个word。（现在变成markdown了）（费曼学习法本质上就是知识输出这种方法）</p>
+<h3 id="为什么要训练模型，训练模型为什么要花很多算力与时间？"><a href="#为什么要训练模型，训练模型为什么要花很多算力与时间？" class="headerlink" title="为什么要训练模型，训练模型为什么要花很多算力与时间？"></a>为什么要训练模型，训练模型为什么要花很多算力与时间？</h3><p><strong>机器学习的角度：</strong></p>
+<p>在监督学习中，给定数据和模型假设空间，就可以构建出优化问题，也即如何确定参数，使得你的优化目标最优化，这也就是所谓的训练吧。训练之后，便可以确定这些参数，这些参数确定的假设空间中的某一假设函数便是所谓的模型。在寻找最优解或者局部最优解的过程中需要通过反向传播、矩阵求导的方式不断更新参数。试错的过程就是不断拟合函数的过程，所以需要算力与实践。</p>
+<p><strong>熵减的角度：</strong></p>
+<p>熵增过程是一个由自发的由<strong>有序向无序</strong>发展的过程。这一概念不仅在热力学和统计学中得到了定义，其实在我们的生活中也随处可见。<strong>传统村落不保护就会荒废、人不思考就会变笨、没有合适的权利制度体系，国家就会走向衰弱、解体。而对抗这一过程的主要方法就是熵减。</strong> 比如制定合理的措施，花费人力与物力来保护传统村落、多思考，多看书让自己的大脑处于活跃的状态、推行适于本国的政策引导国家和人民走向繁荣昌盛。</p>
+<p>机器学习从数据出发，数据本身是无序的、混乱的，或者说是处于低维空间的一个状态。我们想要获得的经验与知识数据是不会张嘴告诉你的。想要获取经验与知识，那就必须通过<strong>加深网络层数、矩阵维度变换、激活函数等增加神经网络的非线性表达能力</strong>，以此提取有价值的特征信息。这一过程无异于克服自然界自发的状态，所以我们要做功对抗这一状态。表现在训练具体上就是利用算力更强的GPU。</p>
+<p><strong>反思：</strong></p>
+<p>在人的实践过程中，开始只是看到过程中各个事物的现象方面，看到各个事物之间的外部联系，这个阶段叫做认识的<strong>感性阶段</strong>。随着实践的继续，由于感觉和印象的东西反复了多次，于是在脑子里产生了概念这个东西，这个阶段叫做认识的<strong>理性阶段</strong>。<strong>认识的真正任务在于经过感觉而到达于思维</strong>，到达于逐步了解客观事物的内部矛盾，了解它的规律性。 </p>
+<p>神经网络亦是如此，浅层的神经网络只能侦测到图像的低维特征，比如边缘（通过可视化我们尚能理解，也能观测），随着层数的加深，逐渐检测到图像的高维特征（这时候即使可视化也看不懂了，观测不到）。</p>
+<p>神经网络由浅入深，由表及里的获取知识的方式是非常正确的，之前我学习GAN抱着从工程的角度中来学习相关知识，其实是不正确的的。只有踏踏实实从python基础开始学才能逐步理解各种问题。</p>
+<p>当局者迷旁观者清，低维的角度只能看到问题的表面，高维的角度能看到问题的实质。当遇到不能解决问题的时候可以试想这从高维的角度出发（<strong>我们往往称为全局</strong>）或许能得到更好的方案。</p>
+<p>我们为什么沉迷于快销类产品无法自拔？短视频、小说等快销类产品是在感官上引起人的共鸣，而通过感官认识世界处于认识的第一个阶段即感性阶段，通过感性阶段到理性阶段是需要推理和判断的，需要做工对抗熵减。而人本身是趋利避害的，所以我们往往沉迷于快销产品而忽视这背后的逻辑。<strong>人的自我修行本质上就是对抗熵增的过程</strong>。</p>
+<h3 id="全局最优解与局部最优解："><a href="#全局最优解与局部最优解：" class="headerlink" title="全局最优解与局部最优解："></a>全局最优解与局部最优解：</h3><p><strong>机器学习角度：</strong></p>
+<p><strong>机器学习的最终目的或获得模型的泛化能力</strong>，然而我们实际能做的努力是使训练（training error）误差最小化，即样本在训练集上的误差最小化，误差本质是E(error)关于权重W（weight）的函数。<br>搜索误差最小时对应权重的值我们用的是反向传播和梯度下降。当然这个函数肯定不是一个二次函数那么简单，所以在通过梯度下降搜索最优解时可能存在多个局部最优解，但却只会有一个全局最优解。<br>然而我们通过训练得到的参数是局部最优解还是全局最优解其实我们并不知道，只能通过测试集的结果对参数不断的进行优化。或许我们从来没找到过全局最优解，甚至局部最优解也没找到。</p>
+<p><strong>反思：</strong></p>
+<p>寻找最优解过程就像摸着黑下山一样，啥都看不见，步子不能迈太长，有危险、不能迈太短，下的太慢。当走到一块平地的时候，也不能确定这是山低还是半山腰，还得继续试探。寻找全局最优解是很困难的，或许一直都找不到，我们应根据当时所处的条件做出理性的选择。也可以趁年轻有试错资本多犯点有意义的错误，不断迭代，不断更新找到“最优解”。<br>当然也不能把局部最优解当成全局最优解（这里有两个理解方式第一种是不能囿于现状，不求上进。第二种是错把局部最优当成全局最优，比如好好读书就一定能成功），有了一定基础后，应该在局部最优解上做一些修正。那么人能不能发现自己处于“最优解”呢？我觉得不一定，如果人能发现自己处于最优解，那他可能就不会贪婪了。如果把这个能力用在股市中，岂不是我们每次炒股都能<strong>低位买进，高位卖出</strong>。</p>
+<h3 id="深度残差网络（ResNet）特征复用思想"><a href="#深度残差网络（ResNet）特征复用思想" class="headerlink" title="深度残差网络（ResNet）特征复用思想"></a>深度残差网络（ResNet）特征复用思想</h3><p><strong>机器学习角度：</strong></p>
+<p>ResNet的提出是为了解决多层神经网络（50层、100层，总之很多层）模型退化的问题，即网络层数在增加到一定程度时，效果可能并不会比浅层神经网络的效果好。<br>浅层的神经网络分辨率高但是只有低级语义，比如前几层的神经网络能识别边缘、轮廓等特征。而深层的神经网络分辨率低，但是可以识别更高级的语义特征（无法形容），如果我们把浅层的神经网络和深层的神经网络结合起来（skip connection）,如第5层再连接第7层、第7层再连接第9层、第9层再连接第11层。那么网络层数即使再深也不会逐渐丢失语义，达到特征复用的目的。</p>
+<p><strong>实例：</strong></p>
+<p>茅台酒在酿制过程中，会经历<strong>9次蒸煮、8次发酵</strong>，工艺比较复杂。（这一过程和神经网络相似，通过层数的叠加，不断做功以此“蒸馏”出知识）<br>酿酒到了最后一步，蒸馏冷却出酒。刚开始冷却出的白酒和最后一部分余酒，分别叫做“酒头”、“酒尾”。绝大多数情况下，酒头、酒尾 都要单独拿出来，放在一边，这个过程叫做“掐头去尾”。若是不管不顾，酒的品质会下降甚至不能喝。但酒头酒尾也不会浪费，一般会在下次蒸馏酒的时候，倒进“下锅水”里，进行复蒸取酒，这样做酒香味会更浓郁，增加酒的辣味与香味。特征复现体现在学习上其实是一种<strong>复盘</strong>思想，所以说每次开会我们都要做<strong>会议纪要</strong>也有这个思想的体现。</p>
+<h3 id="Batch思想："><a href="#Batch思想：" class="headerlink" title="Batch思想："></a>Batch思想：</h3><p><strong>机器学习的角度：</strong><br>当我们在训练模型的时候，如果一次抓取所有数据进行训练。梯度更新会很准确但计算会非常耗时，内存的问题也会导致电脑卡死，同时由于是取所有数据的均值误差。得到的结果虽然中规中矩，但不一定是全局最优解，有可能会卡在局部最优解出不来。<br>如果我们每次只抓取一个数据进行训练，虽然内存不会爆炸，但是由于样本之间的差异性使得梯度更新的方向会左右横跳，始终无法收敛。但针对某些任务而言，使用这种方法可能会更好更快的找到全局最优解，如果10个样本中有1个差异比较大的样本，那可能正是因为这个“刺头”样本带我们跳出了局部最优解。<br>如果我们折中以上两种思想，每次取一个批次即Batch的数据来进行训练。不仅能综合两种方法的优点，也能避免它们的缺点，<strong>但具体问题需要具体分析。根据不同的任务、数据进行合理的选择</strong>。</p>
+<p><strong>实例：</strong></p>
+<p>核酸检测到最后时医生会收走拿来进行检验的棉签。我们观察到医生并不会把所有棉签放在一个很大的试管里，也不会每一个棉签单独放一个试管。他们会把一个<strong>批次的棉签</strong>放在同一个试管里。第一种方法能最大程度上节约材料，但是如果检测出来某一个有问题，排查起来会很麻烦。第二种方法虽然浪费材料。但如果发现有问题，直接可以锁定患者。<br>所以采取批次的方法很好，既能节约材料，如果发现问题，排查起来也不会很费劲。</p>
+<p><strong>反思：</strong></p>
+<p>在面对大多数情况时，不能采取各种极端的处理方式，要分析他们的优缺点之后，采取折中的方法处理问题。但在面对不常规的问题时，如果普通方法找不到“全局最优解“，或许可以采用比较刺头的方法处理问题。</p>
+<h3 id="Auto-Encoder-AE（自编码器）思想"><a href="#Auto-Encoder-AE（自编码器）思想" class="headerlink" title="Auto-Encoder,AE（自编码器）思想"></a>Auto-Encoder,AE（自编码器）思想</h3><p><strong>机器学习的角度：</strong></p>
+<p><strong>AE是通过无监督的方式来学习一组数据的有效编码（或表示）</strong>，AE的学习目标是<strong>最小化重构错误（Reconstruction Error）</strong>。AE由两个神经网络组成，分别是编码器（Encoder）和解码器（Decoder）</p>
+<p>举一个<strong>李宏毅</strong>老师讲过的例子：假设你有非常大量的图片,在 Auto-Encoder 裡面你有两个Network,一个叫做Encoder,一个叫做Decoder,他们就是两个Network</p>
+<ul>
+<li><em>Encoder 把一张图片读进来,它把这张图片变成一个向量,接下来这个向量会变成 Decoder 的输入</em></li>
+<li><em>Decoder 吃 Encoder输出的向量,输出一张图片</em></li>
+</ul>
+<p>AE训练的<strong>目标</strong>是希望,Encoder 的输入跟 Decoder 的输出,越接近越好，所以AE的训练数据 输入—输出是一样的，不需要<strong>标签（label）</strong>。这就是为什么AE是<strong>无监督学习（Unsupervised learning）</strong> 的原因。当然也有学者把这种不用标签的学习方式叫做 Self-Supervised Learning,或者是也有人叫 Pre-Training，这里就不深究了。</p>
+<p><strong>反思：</strong></p>
+<ul>
+<li>大道至简，看起来复杂的事情经过层层抽丝剥茧后其实没那么复杂。线性与非线性本质上也没什么区别，区别在于<strong>看问题的维度</strong>。</li>
+<li>从做事的角度上来说，编码器等于洞察事物的本质，解码器等于以小见大，发散思维。<strong>如何训练好编码器</strong>（一眼看穿事物的本质，将复杂、高维、抽象的事情转变为简单、低维、清晰明了的事情是一项关键任务），<strong>如何训练好解码器</strong>（把简单的理论、现象应用到处理复杂的事情另外一项关键任务）</li>
+<li>园林设计流程包括课程竞赛其实也遵循<strong>编码—解码思想</strong>，透过表象发现主要问题即解码过程。基于问题，采取自上而下或者自下而上亦或是其它什么方法，形成我们的设计思路最后解决到达<strong>逻辑自洽</strong>是编码过程。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h4><p>写这篇文章有一定时间了，放假了有空才传上来。写作过程中也参考了一些资料，比如《毛选》和《西瓜书》。其实还有一些，应该是网上的资料，具体我也找不到出处了，如果有冒犯的地方请私信。另外我的一些想法也在其他地方得到了验证&nbsp;比如李沐老师的用随机梯度下降来优化人生 - 哔哩哔哩 (bilibili.com)&nbsp;&nbsp;、《传习录》里面提到了“知行合一”、《了凡四训》讲的因果。包括最近看的《炒股的智慧》，其实很多道理都是相似的，只是表达的方式不一，看似简单的道理实则蕴含着宏大的哲学理念。作为普通人，我只是停留在“认识”这个层面，真正运用在实践中时，往往因为事物的表象而全然不知所措。</p>
 
                 
             </div>
@@ -658,7 +682,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/2022/03/18/guan-yu-zai-jia-she-kong-jian-zhong-sou-suo-zui-jia-jia-she-de-si-kao/">http://weishicharity.cn/2022/03/18/guan-yu-zai-jia-she-kong-jian-zhong-sou-suo-zui-jia-jia-she-de-si-kao/</a>
+                    <a href="http://weishicharity.cn/2022/03/18/zi-xue-dl-de-si-kao/">http://weishicharity.cn/2022/03/18/zi-xue-dl-de-si-kao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -897,13 +921,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/18/auto-encoder-ae-zi-bian-ma-qi-yin-fa-de-si-kao/">
+                <a href="/2022/03/18/guan-yu-xing-ye-xia-xing-de-si-kao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Auto-Encoder,AE(自编码器)引发的思考">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="关于建筑行业下行的思考">
                         
-                        <span class="card-title">Auto-Encoder,AE(自编码器)引发的思考</span>
+                        <span class="card-title">关于建筑行业下行的思考</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -920,8 +944,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%80%9D%E8%80%83/" class="post-category">
-                                    思考
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
                                 </a>
                             
                             
@@ -946,13 +970,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/16/hello-world/">
+                <a href="/2022/03/18/guan-yu-xiao-zu-zuo-ye-de-si-kao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="关于小组作业的思考">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">关于小组作业的思考</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -963,15 +987,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
+                    </a>
+                    
                 </div>
                 
             </div>

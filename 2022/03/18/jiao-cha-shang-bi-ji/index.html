@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="关于在假设空间中搜索最佳假设的思考, 为事事">
-    <meta name="description" content="放假期间沉迷于奶头乐，许久未有深度思考，今天动动笔，循迹一下逻辑。以机器学习为引，进而管中窥豹抒发一点关于人生的愚见。
-今天要说的内容与机器学习里面的基本术语假设空间有关，在这之前，得先说说机器学习与归纳学习。机器学习简而言之就是让机器具备">
+    <meta name="keywords" content="信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记, 为事事">
+    <meta name="description" content="最近打算把GAN系列的生成模型做一个系统的阐述，以此加深自己的理解能力。由于不同的模型在度量损失值时会用到信息论相关知识，所以在分析模型之前，有必要把信息量、熵、KL散度、极大似然估计等前置知识搞清楚。
+1.1 信息论浅显知识1.1.1 为">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>关于在假设空间中搜索最佳假设的思考 | 为事事</title>
+    <title>信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -419,12 +419,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">关于在假设空间中搜索最佳假设的思考</h1>
+                    <h1 class="description center-align post-title">信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记</h1>
                 </div>
             </div>
         </div>
@@ -552,8 +552,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
-                                生活
+                            <a href="/categories/ml/" class="post-category">
+                                ml
                             </a>
                         
                     </div>
@@ -579,14 +579,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    4.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    16 分
                 </div>
                 
 
@@ -606,32 +606,163 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>放假期间沉迷于奶头乐，许久未有深度思考，今天动动笔，循迹一下逻辑。以机器学习为引，进而管中窥豹抒发一点关于人生的愚见。</p>
-<p>今天要说的内容与机器学习里面的基本术语<strong>假设空间</strong>有关，在这之前，得先说说<strong>机器学习与归纳学习</strong>。机器学习简而言之就是让机器具备找一个函数的能力，是人工智能学科的一个子问题，是归纳学习的一类特殊问题。那什么是归纳学习呢？<br><img src="/images/1.png"></p>
-<p><strong>归纳</strong>（induction）与<strong>演绎</strong>（deduction）是科学推理的两大基本手段。前者是从特殊到一般的<strong>泛化</strong>（generalization）过程，即从具体的事实归结出一般性规律；后者则是从一般到特殊的特化（specialization）过程，即从基础原理推演出具体情况。例如，在数学公理系统中，基于一组公理和推理规则推导出与之相洽的定理，这是演绎；而<strong>从样例中学习</strong>显然是一个归纳的过程，是一个从数据与经验中归纳抽取一般的判定规则与模式的过程，简言之就是你的大脑在不断地归纳、总结最后得到一般规律的过程，因此亦称<strong>归纳学习</strong>。</p>
-<p>其实呢我个人觉得所谓归纳与演绎本质上都是从<strong>认识论</strong>中<strong>经验主义</strong>与<strong>理性主义</strong>发展延伸过来的。小孩子从刚出生一张白纸到能正确分辨出猫猫狗狗基于父母的正确引导；牛顿被苹果砸了一下从而演绎、推导出力学三大定律。</p>
-<p>我们可以把学习过程看做一个在所有假设（hypothesis）组成的空间中进行搜索的过程，搜索目标是找到与训练集匹配（fit）的假设。</p>
-<p>举个例子吧，很大父母都会给给宝宝买一些认知书什么的启蒙读物，里面都是一些很简单的动物、水果等认知图片，这也就是<strong>训练集</strong>。宝宝们通过图片数据归纳出猫猫狗狗的外形特征，从而在现实生活中遇到真实的猫猫狗狗也能分辨出，这就是<strong>泛化</strong>（generalization）过程。然而在遇到一些猫科、犬科的动物时，比如猞猁、老虎、狼等动物时，由于外形相似，宝宝们也会误以为是猫猫狗狗。<br><img src="/images/3.png"></p>
-<p>为什么呢？可能是训练集（认知图片）所含数据太少，宝宝们在认知过程中形成的<strong>假设空间</strong>参数太少（比如只能识别鼻子、爪子、花纹、眼睛等特征）、也有可能是父母的教导方式不对、当然也有可能是个人的认知水平差异造成的。我们只讨论第一种情况，即假设空间参数太少并不能得到最优假设，那么怎样才能得到最优假设呢？其实最简单的办法就是增加训练集，不仅仅是多买几本画册，还可以通过语音、视频等<strong>高维度的媒介</strong>得到更高维的特征，比如（行走的姿态、叫声等）。这样，宝宝们的假设空间会变得更大，也会一步步向<strong>最优假设</strong>靠近。</p>
-<p>概念应该是大致讲清楚了，接下来说说我的思考吧。</p>
-<p>很多鸡汤都说要<strong>拓宽人生的宽度</strong>，那么为什么呢？其实这和上文讲到的假设空间是一个道理。<strong>学习一种乐器、掌握一门语言、熟练使用一个软件</strong>本质上都是增加我们一生要寻求的<strong>最优假设</strong>容量，<strong>假设空间太小</strong>势必会造成对训练集的<strong>过拟合</strong>以及对<strong>测试集</strong>的欠拟合。举一个网上找到的例子吧。</p>
-<p>15岁觉得游泳难，放弃游泳，到18岁遇到一个你喜欢的人约你去游泳，你只好说“我不会耶”。</p>
-<p>18岁觉得英文难，放弃英文，28岁出现一个很棒但要会英文的工作，你只好说“我不会耶”。</p>
-<p>人生前期越嫌麻烦，越懒得学，后来就越可能错过让你动心的人和事，错过新风景。</p>
-<p>虽然是个段子，其实讲述的道理是很深刻的。人嘛，其实就应该去干自己害怕的事儿，跳出自己的舒适圈，多方面的培养自己能力。</p>
-<p>上知乎随便打开一篇鸡汤文章。里面或多或少会提到一些钝感力、逆商力、不要脸的能力等，其实都总结归纳的特别好，培养这些能力实质上就是在拓宽人生的宽度。就像神经网络一样，没有宽度，只有深度的话，再长的神经网络提取到的特征也仅仅是特征的特征，对模型的拟合能力没有质的提升。</p>
-<p>有人说人的一生就是在不停的做选择，我对这句话深以为然。</p>
-<p><strong>这份工作虽然稳定但浑浑噩噩一眼望到底，我想辞职去考研感受另外的人生。辞不辞呢？</strong></p>
-<p><strong>基金股票大跌10个点准备割肉，想想可能马上就涨起来了，还是算了。</strong></p>
-<p><strong>明明知道自己的另一半不爱你，但是想想算了，已经在一起不如将就一下。</strong></p>
-<p>…………</p>
-<p>人的一生总是面临着很多选择，小到中午吃什么，大到求学、谈婚论嫁。当面临选择的时候，很多人会有选择困难症，从而将选择的权利交给别人。其实这说明现在的我们已经大概率陷入死局了，明明知道继续下去是一个不好的结局，还一个个的排着队往下跳。<br><img src="/images/2.png"></p>
-<p>学会<strong>及时止损</strong>、敢于<strong>脱先</strong>是一种非常重要又很难实际运用的能力。不要总是被当前的困难和波折拦下脚步，很多你认为当前过不去的坎，其实回过头看，只是人生中很小的一个波折，与其苦苦搏斗，不如去寻找自己的人生全局最优。并不是说考研、割肉、分手一定是正确的选择，而是在寻找<strong>最优假设</strong>的过程中，在遇到参数迟迟不能更新、模型拟合能力<strong>停滞</strong>甚至下降的时候，如果不采取行动，就会一直陷入当下的死局，与其陷入当下的死局。不如<strong>及时抽身</strong>，去寻找自己的全局最优。</p>
-<h3 id="写在后面的话："><a href="#写在后面的话：" class="headerlink" title="写在后面的话："></a>写在后面的话：</h3><p>中华民族是一个善于运用辩证思维的民族。当面临择业的时候古人云：<strong>忠臣不事二主</strong>，古人又云：<strong>识时务者为俊杰</strong>；在面临创业的时候，古人云：<strong>小心驶得万年船</strong>，古人又云：<strong>撑死胆大的，饿死胆小的</strong>；在面临审判他人的时候，古人云：<strong>得饶人处且饶人</strong>，古人又云：<strong>纵虎归山，后患无穷</strong>。其实古人说的都没错，不同的语境下看似截然相反的言论其实都<strong>指向最优解</strong>。可我觉得这个世界并不是一个简单的<strong>二元分布</strong>，更像是一个复杂的<strong>概率分布</strong>，正是因为这个世界是一个概率分布才让我们身边充满了那么多<strong>不确定性</strong>。所以说本文想要传达的思想并不适用于所有人，具体问题需要具体分析，每个人想要寻求的<strong>最优假设</strong>都不一样，有可能我们穷极一生都找不到最优假设也有可能<strong>当下</strong>就是我们的最优假设。</p>
-<p><strong>参考资料：</strong></p>
-<p>【1】<a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/index.php">https://speech.ee.ntu.edu.tw/~hylee/index.php</a></p>
-<p>【2】<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26708119/">https://book.douban.com/subject/26708119/</a></p>
-<p>【3】<a target="_blank" rel="noopener" href="https://www.douyin.com/video/6971746519246540072">https://www.douyin.com/video/6971746519246540072</a></p>
+                <p>最近打算把GAN系列的生成模型做一个系统的阐述，以此加深自己的理解能力。由于不同的模型在度量损失值时会用到信息论相关知识，所以在分析模型之前，有必要把信息量、熵、KL散度、极大似然估计等前置知识搞清楚。</p>
+<h2 id="1-1-信息论浅显知识"><a href="#1-1-信息论浅显知识" class="headerlink" title="1.1 信息论浅显知识"></a>1.1 信息论浅显知识</h2><h3 id="1-1-1-为什么要引入信息论到机器学习中"><a href="#1-1-1-为什么要引入信息论到机器学习中" class="headerlink" title="1.1.1 为什么要引入信息论到机器学习中"></a>1.1.1 为什么要引入信息论到机器学习中</h3><p>我们可以将深度学习训练过程脑补为“人脑模型”与“机器模型”博弈过程，通过迭代不断缩小两个模型之间的差异。如何衡量两个模型之间的差异，是一个比较重要的议题。</p>
+<p>斯图尔特法官在1964年“雅各布伯利斯诉俄亥俄” 案中，坦言自己无法给淫秽物品下一个准确的定义，而是试图采用观察的方式进行界定，说到“<strong>当我看到时我就知晓它</strong>”。</p>
+<p>“机器模型”的训练过程本质上就和斯图尔特法官在认定淫秽这件事情上是一样的，“人脑模型”本身不参与判断也无法量化，取而代之的是训练数据，即“人脑模型”的低维投射。所以说有时候我觉得深度学习是一种自下而上的学习方法。比如说刚出生的小孩儿没有形成对世界的认识，通过训练数据（外部真实世界）的不断反馈，才形成自己的世界观、价值观，所以说不同的训练数据培养出不同的小孩儿。当然这种说法也不一定对，也有一些天才儿童，根本不需要什么训练数据，或者只需要极少样本就能在年幼的时候基本上形成自己的世界观、价值观，甚至有些小孩儿还记得自己的前世记忆。可能这两种论调就属于认识论中“经验主义”和“理性主义”的范畴吧，在这就不多阐述了。</p>
+<p>当然我们可以定性的比较，但是定性的比较无法量化，不能给机器传递有效的信息，也就不能训练。定量比较可以给出一个具体的数值，机器得以训练下去。为了量化两个模型之间的差异，就像货币能量化两个物品的价值一样，科学家们引入了信息论里面的关键思想作为作为中间产物来描述概率分布或者量化概率分布之间的相似性。</p>
+<ul>
+<li><p><em>什么叫做“人脑模型”呢？我们先说图灵测试，图灵测试是为了测试机器能否表现出与人等价或无法区分的智能。即判断的标准是人的标准或者说将判断标准定义为人的标准。训练过程的本质就是“机器模型”不断接近“人脑模型”的过程，直至两者之间的差距缩小到一个可以接受的值。训练数据的本质是经过“人脑模型”官方认证的子模型</em></p>
+</li>
+<li><p><em>信息论是应用数学的一个分支，主要研究的是对一个信号包含信息的多少进行量化</em></p>
+<h3 id="1-1-2-信息量"><a href="#1-1-2-信息量" class="headerlink" title="1.1.2 信息量"></a>1.1.2 信息量</h3></li>
+</ul>
+<p>在说信息量之前，先谈谈信息是什么。1948年，数学家香农在题为“通讯的数学理论”的论文中指出：“信息是用来消除随机不定性的东西”，创建一切宇宙万物的最基本单位是信息。经济管理学家认为“信息是提供决策的有效数据”。不难看出，两种定义都指向信息是数据的本质，数据 = 信息 + 噪音。</p>
+<p>再来说说信息量，信息量是信息的量化表示，花书上是这样描述信息量的性质的：</p>
+<p><em>1.非常可能发生的事件信息量比较少甚至没有信息量 Eg.太阳从东边升起，西方落下</em></p>
+<p><em>2.较不可能发生的事件信息量较大 Eg.国足拿世界杯冠军</em></p>
+<p><em>3.独立事件具有增量的信息 Eg.掷两次硬币正面朝上的信息量应该是掷一次硬币正面朝上信息量的两倍</em></p>
+<p>为了满足以上3点性质,我们定义一个事件的信息量为<code>f(p)=-log2(p)</code>，单位为<code>bit</code></p>
+<p>举例：掷3次硬币正面朝上的概率为</p>
+<p>$$$\frac{1}{8}$$$，信息量为3bits,掷两次硬币正面朝上的概率为$$$\frac{1}{4}$$$,信息量为2bits,掷一次硬币正面朝上的概率为$\frac{1}{2}$，信息量为1bits。由于3次事件均为独立事件，根据定义可得：$$-log_2(\frac{1}{8})=-log_2(\frac{1}{4})-log_2(\frac{1}{2})$$<br>$$\frac{1}{8}=\frac{1}{4}*\frac{1}{2}$$</p>
+<h3 id="1-1-3-信息熵"><a href="#1-1-3-信息熵" class="headerlink" title="1.1.3 信息熵"></a>1.1.3 信息熵</h3><p>信息量只对单个事件的不确定性进行量化，为了衡量一个系统的不确定性或者混乱程度。香农(Shannon)提出了“信息熵”的概念（借用了热力学中熵的概念），先给出信息熵公式：<br>$$H(x)=-\sum_{i=1}^np(x_i)logp(x_i)$$<br>$$p(xi)\le1$$<br>信息熵的公式和信息量的公式本质上一样，只是多了一个求<strong>期望</strong>的过程。这很容易理解，一个系统含有多个事件，每一个事件的贡献度不一样，所以要乘以事件发生的贡献度即概率。</p>
+<p>举例：每天中午吃什么是一个很纠结的问题。假如说现在有两个学生小A、小B面临3种选择，分别是小面、沙县、炒菜。小A没有忌口，吃啥都行，所以选择每一种食材的概率都一样。小B铁了心要吃小面，所以概率很大。现在我们来衡量一下两位同学内心的纠结程度。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>小面</th>
+<th>沙县</th>
+<th>炒菜</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小A</td>
+<td>1/3</td>
+<td>1/3</td>
+<td>1/3</td>
+</tr>
+<tr>
+<td>小B</td>
+<td>8/10</td>
+<td>1/10</td>
+<td>1/10</td>
+</tr>
+<tr>
+<td>$$H(A)=-\frac{1}{3}log\frac{1}{3}-\frac{1}{3}log\frac{1}{3}-\frac{1}{3}log\frac{1}{3}=1.5849$$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>$$H(B)=-\frac{8}{10}log\frac{8}{10}-\frac{1}{10}log\frac{1}{10}-\frac{1}{10}log\frac{1}{10}=0.9217$$<br>很明显小A同学纠结程度大于小B，这也延伸出一个结论。<strong>在系统的事件可能情况数固定的情况下，事件概率的分布越均匀，信息熵越大，该系统越混乱</strong>。这也不难理解：当一张图像的像素有规律的分布在一起，我们会觉得这张看起来图像很舒适。当一张图像打上了马赛克，即将固定区域内的像素取均值再填充，这张图片看起来会很乱，没有主体。<br>接着中午吃什么的话题继续说，假如现在中午吃什么多了一个选择“黄焖鸡”。那么小A和小B的纠结程度会不会变化呢？</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>小面</th>
+<th>沙县</th>
+<th>炒菜</th>
+<th>黄焖鸡</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小A</td>
+<td>1/4</td>
+<td>1/4</td>
+<td>1/4</td>
+<td>1/4</td>
+</tr>
+<tr>
+<td>$$H(A)=-\frac{1}{4}log\frac{1}{4}-\frac{1}{4}log\frac{1}{4}-\frac{1}{4}log\frac{1}{4}-\frac{1}{4}log\frac{1}{4}=2$$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>很明显小A的纠结程度增加了不少，更不知道吃什么了。这里延伸出另外一个结论。<strong>当系统中的事件都均匀分布的时候，事件的可能情况数越多，系统的信息熵越大</strong>。这也很容易理解：刚装修的房间看起来干净、整洁，可是住久了，林林总总的东西越来越多，如果没有及时收纳，房间越来越凌乱。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>那怎样衡量同一个随机变量两个不同分布之间的差异呢？拿小A和小B的饮食习惯举例，我们希望小B的饮食习惯向小A（更规律）靠近，最容易想到的就是做减法，然后最小化这个值。然而这种白给的办法一般都是错的或者说效率很慢。如果我们直接拿$H(A)-H(B)$的值优化我们的目标函数，这样做没有方向，我们还需要模型知道什么食材在原本的基础上多吃，什么食材在原本的基础上应该少吃。不然狡猾的模型为了能达到最小化目标函数的目的，会走向其它错误的方向。这样做也有可能会使得损失函数该需要大力调整的方向只用一点点力气，不怎么需要调整的方向大刀阔斧的做，最后的结果可能正确，但是时间花费很长。所以相对熵是这样定义的：<br>$$D_{KL}(p\mathop{//}q)=\sum_{i=1}^np(x_i)log\frac{p(xi)}{q(xi)}$$<br>$$=\sum_{i=1}^np(xi)logp(xi)-\sum_{i=1}^np(xi)logq(xi)$$<br>$$=-\sum_{i=1}^np(xi)logq(xi) + \sum_{i=1}^np(xi)logp(xi)$$<br>花书上对KL散度衡量性质是这样定义的：当我们使用一种被设计成能够使得概率分布Q产生的消息的长度最小的编码，发送包含由概率分布P产生的符号的消息时，所需要的额外信息量。我的理解是基于概率分布Q,还需要多少额外信息量才能向靠近P。<br>另外从公式可以看出$D_{KL}(p\mathop{//}q)和D_{KL}(q\mathop{//}p)$是不等价的。<strong>所以KL散度的第一个特征是非对称性</strong>；根据吉布斯不等式，可得：$$-\sum_{i=1}^np(xi)logq(xi)\geq -\sum_{i=1}^np(xi)logp(xi) $$所以<strong>第二个性质是KL散度的非负性，即$D_{KL}(p\mathop{//}q) \geq0$</strong></p>
+<p><strong>实例验证KL散度的非对称性</strong><br>假设现在有ABC三个概率分布：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>True</th>
+<th>False</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>1/2</td>
+<td>1/2</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1/10</td>
+<td>9/10</td>
+</tr>
+<tr>
+<td>C</td>
+<td>3/10</td>
+<td>7/10</td>
+</tr>
+<tr>
+<td>$$D_{KL}(A\mathop{//}B)=\frac{1}{2}log\frac{1}{2}\cdot10 +\frac{1}{2}log\frac{1}{2}\cdot\frac{10}{9}=0.736$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(B\mathop{//}A)=\frac{1}{10}log\frac{1}{10}\cdot2 +\frac{9}{10}log\frac{9}{10}\cdot2=0.531$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(A\mathop{//}C)=\frac{1}{2}log\frac{1}{2}\cdot\frac{10}{3} +\frac{1}{2}log\frac{1}{2}\cdot\frac{10}{7}=0.126$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(B\mathop{//}C)=\frac{1}{10}log\frac{1}{10}\cdot\frac{10}{3} +\frac{9}{10}log\frac{9}{10}\cdot\frac{10}{7}=0.168$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(C\mathop{//}A)=\frac{3}{10}log\frac{3}{10}\cdot\frac{2}{1} +\frac{7}{10}log\frac{7}{10}\cdot\frac{2}{1}=0.118$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>从以上的计算结果我们可以得出以下结论：</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><em>基于B和C对A进行编码 比特数（额外信息量）都增加了，且C需要的比特数小于B，说明C更接近A，也说明对一个信息源编码，按照本身的概率分布进行编码，所需信息量最小</em></li>
+<li><em>$D_{KL}(A\mathop{//}B)\neq D_{KL}(B\mathop{//}A),即KL散度不对称$</em></li>
+<li><em>$D_{KL}(B\mathop{//}A)\gt D_{KL}(B\mathop{//}C)+D_{KL}(C\mathop{//}A),即KL散度不满足三角不等式条件，并不是真的距离$</em></li>
+</ul>
+<h3 id="1-1-5-交叉熵"><a href="#1-1-5-交叉熵" class="headerlink" title="1.1.5 交叉熵"></a>1.1.5 交叉熵</h3><p>都有了KL散度能衡量两个概率分布之间的差异了，那么为什么还会出现交叉熵这个概念呢？<br>是这样的，前面的例子举得都是概率分布，而在深度学习中，为了让“机器模型”不断逼近“人脑模型”，我们给的数据都是真实分布。标签要么对、要么错，也就是0和1。所以说$$H(P)=-\sum_{i=1}^np(xi)logp(xi)=0$$那么KL散度剩下的一部分就是交叉熵$H(PQ)$了。即是说$$D_{KL}(p\mathop{//}q)=H(PQ)-H(P)$$<br>$$H(PQ)=-\sum_{i=1}^np(xi)logq(xi)$$<br>而在真实分布中，$P(xi)$只有0和1两种情况，故以上公式可以改写为：<br>$$$H(PQ)=-plog_2q-(1-p)log2(1-q)$$$<br>进一步改写为：<br>$$<br>H(PQ)=-ylog_2\widehat{y}-(1-y)log2(1-\widehat{y})<br>$$<br>现在就变成了我们耳熟能详的交叉熵损失函数（CrossEntropyLoss），其中：$$$y=标签,\widehat{y}=预测值$$$</p>
+<h2 id="1-2-极大似然估计"><a href="#1-2-极大似然估计" class="headerlink" title="1.2 极大似然估计"></a>1.2 极大似然估计</h2><p>上面说到斯图尔特法官认定淫秽这件事儿，其实极大似然估计的核心思想和这个实例如出一辙。</p>
+<p>先说说概率是什么，概率，亦称“或然率”，它是反映随机事件出现的可能性大小。随机事件是指在相同条件下，可能出现也可能不出现的事件。例如，从一批有正品和次品的商品中，随意抽取一件，“抽得的是正品”就是一个随机事件。设对某一随机现象进行了n次试验与观察，其中A事件出现了m次，即其出现的频率为m/n。经过大量反复试验，常有m/n越来越接近于某个确定的常数。该常数即为事件A出现的概率，常用P(A)表示。<br>“似然”本质上是概率的反向应用，拿摸球举例子。假如从黑箱我们一共摸了10次球，3黑7白。那么是不是可以推断出黑箱里面黑球与白球的比例约等于3:7，或者说3:7的概率最大。我们可以算出此次事件的似然值。即$$$\frac{3}{10}^3·\frac{7}{10}^7=0.0022，将具体的比例换算成p和1-p 可得p^3·(1-p)^7。要使似然值最大，那么p=\frac{3}{10},p等于\frac{2}{10}、\frac{9}{10}$$$或者其它值，似然值都不是最大的。所以<strong>通过可以观测到的结果估算某一个概率分布，我么就要尽可能的最大化似然值，这就是极大似然估计</strong>。</p>
+<p>概念应该讲清楚了，接下来说为什么把极大似然估计放在交叉熵后面来讲。现实生活中我们经常会用到极大似然估计，比如说看到蚂蚁搬家，我们就知道大概要下雨了。准备去餐馆吃饭，一家门庭若市，一家门可罗雀。那我们潜意识就会认为第一家的饭好吃。那为什么我们会根据观测到的内容推断出未知的场景呢？其一观测到的内容本质上是未知场景的低维投射，它可以反应未知场景的一部分情况；其二观测到的内容是经过“人脑模型”认证的东西，是打了标签的，是长期以来积累的经验。</p>
+<p>既然现实生活中都能用极大似然估测未知情况，想必深度学习也能用极大似然预测未知概率分布（为什么呢，因为我觉得越简单的道理越具有普适性），回到损失函数中，在处理分类问题时。比方说猫、狗、车、飞机的四分类问题。输入一张图片经过一长串网络最后通过softmax层后我们会得到一个类似[0.7,0.1,0.1,0.1]的概率分布。真实标签是[0,0,0,1]这说明机器认为这张图片是猫的概率最大，但是标签确显示这张图片是飞机。根据刚才摸球的例子我们可以用连乘算出似然值。$0.7^0·0.1^0·0.1^0·0.1^1=0.1$，理论上就可以把似然值当成loss去做梯度上升。当然连乘看起来太麻烦。我们可以改成连加(不影响结果)，假设问题为二分类则我们需要最大化的似然值为：<br>$$p^x·(1-p)^{1-x}$$<br>加上log将连乘改成连加：<br>$$log(p^x·(1-p)^{1-x})$$<br>$$=xlogp+(1-x)log(1-p)$$<br>$$=ylog\widehat{y}+(1-y)log(1-\widehat{y})$$<br>由于这里是最大化似然值，加上一个负号就变成了我们需要最小化的loss:<br>$$loss=-ylog\widehat{y}-(1-y)log(1-\widehat{y})$$<br>可以发现，由极大似然推出来的损失函数和由交叉熵推出来的损失函数一样，只是前者为了方便，加上了log把连乘变成连加，后者的log是定义出来的。</p>
+<h2 id="2-1-总结与思考"><a href="#2-1-总结与思考" class="headerlink" title="2.1 总结与思考"></a>2.1 总结与思考</h2><p>结合手里面的书籍和网上的一些资料（尤其是B站UP主<strong>王木头学科学</strong>），本文记录了自己学习GAN时遇到的一些概念并以“实例计算、结合生活”等方法阐述了自己的理解（当然是浅显的、不专业的、管中窥豹的）。我自己是比较喜欢这种方法的，因为我觉得理论和生活虽然是不同次元、不同维度的东西，但其本质上是紧密联系的，我们看不到联系可能是我们平时习惯了线性的思维方式，也有可能我们思考问题的维度太低。</p>
+<p>最后再回到信息熵这里，既然熵可以度量一个系统的混乱程度，那么熵这个概念有没有可能和<strong>景观评价</strong>结合一下呢？直觉告诉我是可以的，园林系统本质上是随着时间、空间不断变幻的<strong>时空序列</strong>，人流量、绿量、生物量、地形地貌等时空数据构成了这个序列。但这些数据从应用角度熵来说并不等同于概率分布，如何量化不同数据之间的差异可能是一个比较重要的议题，此外，由于专业的特殊性如何找到正确的标签值可能是另外一项关键问题。</p>
+<h2 id="2-2-参考资料"><a href="#2-2-参考资料" class="headerlink" title="2.2 参考资料"></a>2.2 参考资料</h2><p>【1】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15V411W7VB?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV15V411W7VB?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0</a></p>
+<p>【2】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wq4y1L7Tu?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Wq4y1L7Tu?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0</a></p>
+<p>【3】<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A6%82%E7%8E%87/828845">https://baike.baidu.com/item/%E6%A6%82%E7%8E%87/828845</a></p>
+<p>【4】<a target="_blank" rel="noopener" href="https://blog.csdn.net/oBrightLamp/article/details/85269091">https://blog.csdn.net/oBrightLamp/article/details/85269091</a></p>
+<p>【5】<a target="_blank" rel="noopener" href="https://www.thepaper.cn/newsDetail_forward_2727085">https://www.thepaper.cn/newsDetail_forward_2727085</a></p>
+<p>【6】<a target="_blank" rel="noopener" href="https://book.douban.com/subject/27087503/">https://book.douban.com/subject/27087503/</a></p>
+<p>【7】<a target="_blank" rel="noopener" href="https://book.douban.com/subject/33437381/">https://book.douban.com/subject/33437381/</a></p>
 
                 
             </div>
@@ -658,7 +789,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/2022/03/18/guan-yu-zai-jia-she-kong-jian-zhong-sou-suo-zui-jia-jia-she-de-si-kao/">http://weishicharity.cn/2022/03/18/guan-yu-zai-jia-she-kong-jian-zhong-sou-suo-zui-jia-jia-she-de-si-kao/</a>
+                    <a href="http://weishicharity.cn/2022/03/18/jiao-cha-shang-bi-ji/">http://weishicharity.cn/2022/03/18/jiao-cha-shang-bi-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -893,17 +1024,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/18/auto-encoder-ae-zi-bian-ma-qi-yin-fa-de-si-kao/">
+                <a href="/2022/03/18/jiao-cha-shang-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Auto-Encoder,AE(自编码器)引发的思考">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记">
                         
-                        <span class="card-title">Auto-Encoder,AE(自编码器)引发的思考</span>
+                        <span class="card-title">信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -913,21 +1045,22 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%80%9D%E8%80%83/" class="post-category">
-                                    思考
+                            <a href="/categories/ml/" class="post-category">
+                                    ml
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -946,13 +1079,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/16/hello-world/">
+                <a href="/2022/03/18/guan-yu-xue-xi-de-si-kao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="关于记录学习的思考">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">关于记录学习的思考</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -963,15 +1096,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            为事
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
+                    </a>
+                    
                 </div>
                 
             </div>
