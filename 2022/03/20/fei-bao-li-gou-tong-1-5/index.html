@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="learning from data 1, 为事事">
-    <meta name="description" content="为了充实寒假生活，所以打算刷一些关于深度学习的公开课。在林轩田老师的’机器学习基石’这门课的评论区看到有人推荐加州理工大学出品的”Learning From Data” 。看了10分钟，觉得老师挺帅也挺幽默，于是记了一些笔记，希望能坚持下来">
+    <meta name="keywords" content="非暴力沟通（Nonviolent Communication）1-5章读书笔记, 为事事">
+    <meta name="description" content="最近在读马歇尔·卢森堡 (Marshall B.Rosenberg)的非暴力沟通（Nonviolent Communication）。我认为写的很不错，其中关于观察、感受、需要等名词的阐述令我受益匪浅，让我想到了很多生活中的沟通实例在这方面">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>learning from data 1 | 为事事</title>
+    <title>非暴力沟通（Nonviolent Communication）1-5章读书笔记 | 为事事</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -418,12 +418,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">learning from data 1</h1>
+                    <h1 class="description center-align post-title">非暴力沟通（Nonviolent Communication）1-5章读书笔记</h1>
                 </div>
             </div>
         </div>
@@ -539,23 +539,22 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">笔记</span>
+                            <a href="/tags/%E6%80%9D%E8%80%83/">
+                                <span class="chip bg-color">思考</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A/">
+                                <span class="chip bg-color">非暴力沟通</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">读书笔记</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/ml/" class="post-category">
-                                ml
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -564,28 +563,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-16
+                    2022-03-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-03-18
+                    2022-03-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    3.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    12 分
                 </div>
                 
 
@@ -605,58 +604,92 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>为了充实寒假生活，所以打算刷一些关于深度学习的公开课。在林轩田老师的’机器学习基石’这门课的评论区看到有人推荐加州理工大学出品的”Learning From Data” 。看了10分钟，觉得老师挺帅也挺幽默，于是记了一些笔记，希望能坚持下来。</p>
-<h2 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h2><p>第一章讲的东西比较简单，首先以”电影评价”的实例引出了机器学习的触发条件，即1.存在一个模式2.这种模式不容易被数学公式直接表达3.我们有关于这种模式的大量数据。紧接着以”信贷审批”的实例介绍了本课的第一个模型——感知机，围绕感知机阐述了”假设空间”、”最佳假设”等名词，并简单介绍了感知机权重更新方法，最后以QA环节结束了第一课。</p>
-<h2 id="the-learning-problem"><a href="#the-learning-problem" class="headerlink" title="the learning problem"></a>the learning problem</h2><ul>
-<li>Example of machine learning</li>
-<li>Components of learning </li>
-<li>A simple model </li>
-<li>types of learning</li>
-<li>QA<h3 id="1-Example-of-machine-learning"><a href="#1-Example-of-machine-learning" class="headerlink" title="1.Example of machine learning"></a>1.Example of machine learning</h3>Predicting how a viewer will rate a movie</li>
-</ul>
-<p><strong>10%</strong> improvement = <strong>1 million dollar prize</strong></p>
-<p><strong>1.1The essence of machine learning:</strong><br>  <strong>1.1.1A pattern exists</strong>(if a pattern did’t exist, there would be nothing to look for )<br>  <strong>1.1.2We cannot pin it down mathematically</strong> (We couldn’t write down the system on our own,so we’re going to depend on data in order to be able to find the system)<br>  <strong>1.1.3.we have a data on it</strong>(learning fron data. so if some one knocks on my door with an interesting machine learning application, and they tell me how existing it is, and how great the application would be ,and how much money they would make, the first question i ask, what data do you have? if you data, we are in business, if you don’t, you are out of luck.)</p>
-<h3 id="2-Components-of-learning"><a href="#2-Components-of-learning" class="headerlink" title="2.Components of learning"></a>2.Components of learning</h3><p><strong>2.1 Metaphor:</strong> credit approval</p>
-<p>you apply for a credit card, and the bank wants to decide whether it’s a good idea to extend a credit card for you or not .From the bank’s point of view, if they’re going to make money ,the are happy. if they are going to lose money,they are not happy. <strong>That’s the only criterion they have</strong></p>
-<p><strong>2.2 Formalization:</strong><br><strong>input:  X</strong>  (customer application. age、gender、annualsalary.etc all kinds of fields that are believed to be related to the creditworthiness)<br><strong>output: y</strong> (extend credit or not to extend credit,+1 and -1.)</p>
+                <p>最近在读马歇尔·卢森堡 (Marshall B.Rosenberg)的非暴力沟通（Nonviolent Communication）。我认为写的很不错，其中关于观察、感受、需要等名词的阐述令我受益匪浅，让我想到了很多生活中的沟通实例在这方面比较匮乏也很容易忽略掉。 为了提高自己的沟通技巧、锻炼自己思辨能力，于是记录一下学习过程中的感受与心得体会，采取的方式是原文摘录\改写+实例反省。本文的内容涵盖范围是一到五章。</p>
+<h3 id="第1章-由衷的给予"><a href="#第1章-由衷的给予" class="headerlink" title="第1章 由衷的给予"></a>第1章 由衷的给予</h3><p>要达到让双方都能发自内心的相互给予，我们需要将注意力聚焦在四个方面-他们是非暴力沟通模式的四个要素<br><strong>观察、感受、需要、请求</strong></p>
+<p><strong>描述事实-表达感受-表达期望-说明具体请求</strong></p>
+<p>我此刻的观察、感受和需要是什么，为了让我的生命更美好，我的请求是什么；你此刻的观察、感受和需要是什么，为了让你的生命更美好，你的请求是什么？</p>
+<p>eg:为事，看到沙发上的脏袜子和纸屑，我很生气，因为我希望在我们共同的空间里能多些整洁。你愿意把你的袜子放在你的房间或者放进洗衣机吗？（表达感受指的是内心真实想法，而不是借此传播负面情绪）</p>
+<h3 id="第2章-疏离生命的语言"><a href="#第2章-疏离生命的语言" class="headerlink" title="第2章 疏离生命的语言"></a>第2章 疏离生命的语言</h3><p><strong>你们不要论断人，免得你们被论断</strong>。</p>
+<p><strong>因为你们怎样论断人，也必怎样被论断</strong>。    ——《圣经·马太福音7:1》</p>
+<h4 id="1-道德评判"><a href="#1-道德评判" class="headerlink" title="1.道德评判"></a>1.道德评判</h4><p><strong>当他人的行为与我们的价值观不符，我们便认为这个人是错的或是恶的</strong>。指责、侮辱、贴标签、批评、比较、分析都是批判的形式，<strong>当我们在分析和批判时，其实都是在表达\捍卫自身的价值观和需要</strong>，但这样的表达方式却是悲剧性的，引发的是对方的防卫与抗拒。就算他人遵从了我们，很有可能是出于恐惧、内疚或羞愧，而非发自内心。<strong>我们应该在分析和追究自己和他人有什么问题之前，想一想自己和他人到底有什么需要没有得到满足，对症下药方能治百病</strong>。赚钱如此、亲密关系如此、做设计也是如此。</p>
+<h4 id="2-作比较"><a href="#2-作比较" class="headerlink" title="2.作比较"></a>2.作比较</h4><p>一旦我们开始比较，就会感到郁闷。</p>
+<p>室友还没毕业家里面就安排好工作啦、同门师兄弟又发了核心、好朋友天天到处耍不用担心房车…</p>
+<p>其实也没啥，人生就像打牌一样，每个人自出生开始就抓到了属于自己的牌。无论好坏，不需要羡慕别人，坚持打完总归不会太差。抓到好牌，我们要戒骄戒躁、努力经营，把牌的价值发挥到最大。抓到不太好的牌，也没关系嘛~慢慢打，等待机遇。  </p>
+<p>好牌不一定笑到最后，坏牌也不一定满盘皆输。</p>
+<p>当然，抓到坏牌需要打下去的勇气。很多人都坚持不下去，所以我觉得<strong>勇气是最伟大的品质！</strong></p>
+<h4 id="3-推卸责任"><a href="#3-推卸责任" class="headerlink" title="3.推卸责任"></a>3.推卸责任</h4><p>每一个人都对自己的思想、情感与行为负有责任，若无法意识到这点，沟通也会疏离与生命的连接。</p>
+<p><strong>当我们将行动的原因归咎于外部因素时，我们便在试图推卸自己的责任。</strong></p>
+<p>常见的口头表达方式有：不得不、让人感到…<strong>借由这样的说法，我们也回避了为自己的感受和想法所负的责任。</strong></p>
+<p>eg:我厌恶上班。我去工作，因为我是一名丈夫和父亲。 ✖</p>
+<p>（沟通方式不恰当，把行动的原因归因为性别角色、社会角色或年龄角色。这样推脱责任，势必会给家人带来压力，个人觉得应该归因为丈夫\父亲肩负的责任）</p>
+<p>eg:我一时没克制住，就把那根棒棒糖给吃了。 ✖</p>
+<p>（把行动的外部因素归因为无法抑制的冲动，这样不真诚的做法无法取得别人的原谅。个人觉得应该回到问题本身，即为什么忍不住？）</p>
+<p>eg:我的女朋友给我戴了绿帽，所以我选择分手 ✖</p>
+<p>（当然这个例子太极端了哈，用在这里不太恰当，但道理都是相通的。把行动的原因归因为他人的行为，这是对自己的不负责任。当然如果真的遇到了这种事情，我认为<strong>首先</strong>应该反思一下有没有自身的原因。古人云：<strong>见不贤而内自省也</strong> ，如果没有的话~那就任由他们去吧。<strong>其次</strong>应借此机会磨炼自己心性：<strong>天下有大勇者，卒然临之而不惊，无故加之而不怒。此其所挟持者甚大，而其志甚远也。</strong> 咱们都是干大事的人，这点小小波折就把我们困住了吗？  <strong>最后</strong>应该拒绝emo,开启新的生活。<strong>祸兮，福之所倚；福兮，祸之所伏。得到未必是福，失去未必是祸。</strong> 让我们静待缘分吧！）</p>
+<p>当<strong>我们遇到挫折，想推卸责任时，我认为应该想想两个问题。其一是我们为什么要推卸责任？我们在害怕什么？其二是导致挫折的核心问题是什么？能不能解决？</strong></p>
+<p><em>我常想，若有一天日渐强大的摧毁性技术使人类从地球上灭绝，真正要对此负责的远非是技术本身（当然技术暴行会唤醒人们，招来人们对技术的反击与仇视），而是现代人的唯唯诺诺、缺乏责任感、毕恭毕敬的服从每一个司空见惯的规定。我们所看到的悲剧以及即将来临的更大悲剧，并非是世界上反抗、不服从的人增多了，而是唯命是从、听话的人越来越多。</em> —乔治·贝尔纳诺斯</p>
+<h4 id="4-其它疏离生命的沟通形式"><a href="#4-其它疏离生命的沟通形式" class="headerlink" title="4.其它疏离生命的沟通形式"></a>4.其它疏离生命的沟通形式</h4><p><strong>当我们以“要求”的方式表达我们的诉求时，实际上是在或明或暗地指责或惩罚那些不配合我们的人</strong>，特别是来自那些有着权利地位的人。</p>
+<h3 id="第3章-不带评论的观察"><a href="#第3章-不带评论的观察" class="headerlink" title="第3章 不带评论的观察"></a>第3章 不带评论的观察</h3><p><strong>我们要区分观察和评论。</strong> </p>
+<p>语义学家温戴尔·约翰逊(Wendell Johnson)指出，<strong>用静态的语言来捕捉瞬息万变的现实世界，会带来许多问题。</strong></p>
+<h4 id="1-人类智力的最高形式"><a href="#1-人类智力的最高形式" class="headerlink" title="1.人类智力的最高形式"></a>1.人类智力的最高形式</h4><p>印度哲学家克里希那穆提(J.Krishnamurti)曾经说：<strong>“不带评论的观察是人类智力的最高形式。”</strong></p>
+<p><strong>观察他人而不做任何评判、批判或分析是很困难的</strong>。简单来说就是把自己当做机器，只描述观察到的事实，而不添加任何情绪在里面。</p>
+<h4 id="2-区分观察和评论"><a href="#2-区分观察和评论" class="headerlink" title="2.区分观察和评论"></a>2.区分观察和评论</h4><p><strong>混淆观察和评论是常见的错误，我们应该正确的区分观察与评论。否则不恰当的表达会引发他人的逆反心理，而非慈悲之情。</strong></p>
+<p>eg：你太大方了 ✖ <strong>未对自己的评论负责</strong></p>
+<p>当我看到你将午餐的钱都给了别人，我认为你这样做太大方了 ✔</p>
+<p>为事爱拖延 ✖ <strong>使用的动词暗含评论</strong></p>
+<p>为事只在考试前一晚学习 ✔</p>
+<p>他无法完成工作。 ✖ <strong>推断他人的想法、感受、意向、或愿望时，暗示这是唯一可能</strong></p>
+<p>我不认为他能完成工作。或他说：“我无法完成工作” ✔</p>
+<p>如果你的饮食不均衡，健康就会出现问题。 ✖ <strong>把预测当做确定的事实</strong></p>
+<p>如果你的饮食不均衡，我担心你的健康会出问题 ✔</p>
+<p>韦小宝不会写论文，文笔太差 ✖ <strong>在描述他人能力时，并未表明那只是自己所做的评论</strong></p>
+<p>韦小宝投了20个期刊，一一被拒绝了 ✔</p>
+<p>韦小宝长得难看 ✖ <strong>使用含有评论意味的形容词或副词</strong></p>
+<p>韦小宝的样貌对我没有吸引力 ✔</p>
+<p>非暴力沟通是一种动态的语言，它不鼓励人们做静一概而论的陈述，而是提倡我们在描述观察时，清楚地说出特定的时间和境界。<strong>多一些定量陈述，少一些定性评价</strong></p>
+<h3 id="第4章-体会与表达感受"><a href="#第4章-体会与表达感受" class="headerlink" title="第4章 体会与表达感受"></a>第4章 体会与表达感受</h3><p><strong>非暴力沟通的第一个要素是不带评论的观察；第二个要素则是如何表达内心的感受。</strong></p>
+<h4 id="1-压抑感受的代价"><a href="#1-压抑感受的代价" class="headerlink" title="1.压抑感受的代价"></a>1.压抑感受的代价</h4><p>人们认为感受是无关紧要的，重要的是各种权威所界定的“正确思考方式”。我们被训练成以他人为导向、而非聆听自己。</p>
+<p>for example，假如说在经历面试、演讲、汇报等场面时。如果因为主客观原因感到紧张、压抑、害怕时怎么办？ <strong>其中之一办法就是示弱，表达自己脆弱的一面</strong>，明确的说明原因。是因为初次见面，或者头一次上台，亦或者工作太忙没准备好等等。</p>
+<h4 id="2-区分感受与想法"><a href="#2-区分感受与想法" class="headerlink" title="2.区分感受与想法"></a>2.区分感受与想法</h4><p>感受不等于想法，感受是由自己内心发出的、未经雕饰、纯粹的；而想法是有杂念的、加工过的、不纯粹的，换一个说法是为了迎合别人而说出来的。</p>
+<p><strong>想法是感受的投射、是另外一种表达方式</strong>，就像剧本和电影的关系一样。剧本包含的信息量显然高于电影、张力也更大。但电影所带给观众的感性、共情能力也更强。</p>
+<p><strong>常见容易混淆的感受\想法：</strong></p>
+<p>1.在“我感到\觉得”后加上一句话类似“就像”“好似”这样的词。</p>
+<p>eg:我觉得好像在和一堵墙生活</p>
+<p>2.在“我感到\觉得”后带上“我、你、他”等人称</p>
+<p>eg:我觉得自己一直在被召唤</p>
+<p>3.在“我感到\觉得”后加上指代他人的名称或者名词</p>
+<p>eg:我觉得为事挺负责的</p>
+<p><strong>其实在表达感受时间，甚至可以完全不使用“感到\觉得”这个词。直接说 “我不开心” “我很恼火”就OK 不用压抑自己。</strong></p>
+<p><strong>在沟通中，区分表达自己的感受还是在表达自己的想法</strong></p>
+<p>eg: 我觉得作为一名设计师，我画的方案不够完美 ✖</p>
+<p>想到我的方案画的辣鸡，我就失望\沮丧\着急 ✔</p>
+<p>eg: 我觉得我的同事看不起我 ✖</p>
+<p><strong>看不起是在描述想法，即我认为别人是如何看待我，背后的感受也许是难过、挫败</strong></p>
+<p>eg: 我感到被误解 ✖</p>
+<p><strong>被误解是在描述想法，即我认为他人不了解我，背后的感受也是是焦虑、不快等</strong></p>
+<h3 id="第5章-为自己的感受负责"><a href="#第5章-为自己的感受负责" class="headerlink" title="第5章 为自己的感受负责"></a>第5章 为自己的感受负责</h3><h4 id="1-听到不中听的话有四种选择"><a href="#1-听到不中听的话有四种选择" class="headerlink" title="1.听到不中听的话有四种选择"></a>1.听到不中听的话有四种选择</h4><p>当他人通过语言或者非语言的方式向我们发出负面情绪时，我们可以选择四种不同的方式来接受：</p>
 <ul>
-<li><strong>Target function:</strong> $\mathcal{f}$:     $\mathcal{X}$    $\longrightarrow$ $\mathcal{Y}$ (ideal credit approval formula)</li>
-<li><strong>Data:</strong>$(x_1,y_1),(x_2,y_2),···,(x_N,y_N)$</li>
-<li><strong>Hypothesis</strong> $\mathcal{g}$:     $\mathcal{X}$    $\longrightarrow$ $\mathcal{Y}$   such as  Linear module、Neural network、SVM(The Hypothesis is the formal name we’re going to call the formula we get to approximate th target function. So the hypothesis lives in the  same world as the target function.The value of g,it supposedly approximates f)</li>
+<li>指责自己，将错误归咎到自己身上</li>
+<li>指责对方，将错误归咎到对方身上</li>
+<li><em>关注我们自己的感受和需要</em></li>
+<li>关注对方想要表达的感受和需要</li>
 </ul>
-<p><strong>2.3 Solutioln components of the learning problem</strong></p>
-<p>The Hypothesis Set(Perceptron model、Neural Network)</p>
-<p>  $\mathcal{H}$={$\mathcal{h}$}&amp;nbsp; &amp;nbsp; &amp;nbsp; $\mathcal{g}$ $\in$  $\mathcal{H}$<br> h is a function,pretty much like the final hypothesis g,g is just one of them that you happen to elect. so whe we elect it, we call it g. if it’s sitting there generically,we call it h</p>
-<p>The Learning Algorithm(perceptron learning algorithm、back propagation)-minimizing an error funnction </p>
-<p>Together, they are referred to as the <strong>learning model</strong> So every time you have a model,there is a hypothesis set,and then there is an algorithm that will do the searching one of those guys</p>
-<p><strong>2.4 A simple hypothesis set - the ‘perceptron’</strong></p>
-<p>For input $X=(x_1,···，x_d)$  &amp;nbsp; &amp;nbsp; &amp;nbsp;d-dimensional vector&amp;nbsp; &amp;nbsp; &amp;nbsp;  ‘attributes of a customer’</p>
-<p>Approve credit if:  $$$\sum_{i=1}^dw_ix_i&gt;threshold$$$</p>
-<p>Deny credit if:     $$$\sum_{i=1}^dw_ix_i &lt; threshold$$$</p>
-<p>This linear formula $\mathcal{h}$ $\in$  $\mathcal{H}$ can be written as:$$$h(x)=sign((\sum_{i=1}^dw_ix_i)-threshold)$$$</p>
-<p><img src="https://files.mdnice.com/user/23843/b66a5b48-212e-4904-a880-7ea0c0b90580.jpg"></p>
-<p>Now we are going to have a simple change of notation.instead of calling it threshold,we’re going to treat it as if it’s a weight. It was minus threshold. Now we call it plus $w_0$:$$$h(x)=sign((\sum_{i=1}^dw_ix_i)-w_0)$$$</p>
-<p>Now we’are going to add $x_0$. This is not an attribute of the customer,but an artifical constant we add,which happens to be alaways +1.When we do that,then all of a sudden the formula simplifies.Summing from i equals 0,instead of i equals 1:$$$h(x)=sign((\sum_{i=0}^dw_ix_i)) $$$ it looks better!<br>And now we put it as a vector,which will simplify matters.In vector form,the perceptron implements:$$$h(x)=sign(W^TX)$$$  <strong>it looks better!</strong></p>
-<p>The hypothesis set tells you the resources you can work with.Now we need the algorithm that is going to look at the data,the training data that you’re going to use,and navigate through the space of bhypothesis, to bring the one that is going to output as the final hypothesis that you give to your customer.<br><img src="https://files.mdnice.com/user/23843/b5a46d16-a3e5-4c56-8fa5-c3215a7c9f60.jpg"></p>
-<p><strong>2.5 A simple learning algorithm - PLA</strong></p>
-<p>The perceptron implements:$$$ h(x)=sign(W^TX)$$$<br>Give the training set:$$$(x_1,y_1),(x_2,y_2),···（x_N,y_N）$$$<br>pick a missclassified point:$$$sign(W^TX_n) \neq y_n$$$<br>and update the weight vector:$$$W\leftarrow W+y_nX_n$$$<br>So this is the intuition behind it<br><img src="https://files.mdnice.com/user/23843/383bb46f-271c-4a96-8fef-7b736a2955c3.jpg"></p>
-<p><strong>2.6 Iteration of PLA</strong></p>
-<p>One iteration of the PLA:$$$W\leftarrow W+yx$$$<br>where(x,y)is a misclassified training point.<br>At iteration $$$\mathcal{t}=1,2,3···$$$，pick a misclassified point from$$$(x_1,y_1),(x_2,y_2),(x_N,y_N)$$$<br>and run a PLA iteration on it.<br>That’s it!</p>
-<p>The good news for the PLA is that all you need to do, is for iteration 1,2,3,4,et cetera,pick a missclassified point,anyone you like.Then end up with the case that you will get to a correct solution.</p>
-<p>Not clear at all that it will be good,because all you did was match the historical records.That’s  why have to develop all of this theory.</p>
-<h3 id="3-types-of-learning"><a href="#3-types-of-learning" class="headerlink" title="3.types of learning"></a>3.types of learning</h3><p><strong>3.1 Basic premise of learning</strong></p>
-<p><em>use a set of observations to uncover an underlying process</em></p>
-<center>broad premise $\Rightarrow$ many variations</center>
-  
-<ul>
-<li>Supervised Learning</li>
-<li>Unsupervised Learning</li>
-<li>Reinforcement Learning<h3 id="4-QA"><a href="#4-QA" class="headerlink" title="4.QA"></a>4.QA</h3></li>
-</ul>
-<p><strong>4.1 How do you determine if a set of points is linearly separable,and what do you do if they’re not separable</strong></p>
-<p>there is a way to deal with it.However,the questino how do you determine it’s linearly separable, the right way of doing it in praticeis that,when someone gives you data,you assume in general it’s not linearly separable.and therefore you take techniques that can deal with<br><strong>4.2 How does the rate of convergennce of the perceptron change with the dimensionality of the data</strong></p>
-<p>Badly</p>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>虽然是2012年的课，但是对于我这种自学的还是非常有价值的。文中对感知机的训练方法介绍的不是太清楚，我个人的理解是遍历训练集，只要找到判断错误的数据就更新对应的权重。这样，通过不停迭代找到的超平面维度会一直往上升，所以说就不存在一次迭代过程中，更新权重时纠正一个分类错误的点，但导致另外一个已经分对的点分错这种情况。目前先这样理解吧，以后用代码来验证一下想法。</p>
+<p>通过关注我们的需要、愿望、期待、价值观或想法，我们不再指责他人，而是为自己的感受负责。</p>
+<p>为了让我们对自身所负的责任有更多的意识，我们可以替换成“我感到···因为我”这样的句式来表达</p>
+<h4 id="2-需要，感受的根源"><a href="#2-需要，感受的根源" class="headerlink" title="2.需要，感受的根源"></a>2.需要，感受的根源</h4><p>当我们评判、批评、分析或判断他人的言行时，实际上是在用疏离生命的方式表达自己的需要。他人很容易认为我们在批评他们，并随之启动自我辩护和反抗。<strong>我们越能说出感受以及相关联的需要，他人也越有可能对我们做出善意的回应。</strong></p>
+<p>人们更善于分析对方的错，而非清晰的表达自己的需要。在我们身处的世界中，我们时常会因为袒露自身需要而遭到强烈的批判，因而对表达需要感到害怕。whatever，<strong>我们要大胆的表达自己的需要、描述事实而非拐弯抹角的传播负能量。为了让我们对自身所负的责任有更多的意识，我们可以替换成“我感到…因为我…”这样的句式来表达。</strong></p>
+<p>eg:我很高兴你获得了那个奖项 ✖  </p>
+<p>你获得了那个奖项我很高兴，因为我一直希望你的努力能得到认可 ✔</p>
+<p>人们在背后议论我，这让我感到伤心 ✖ </p>
+<p>人们在背后议论我，我感到伤心，因为我希望得到欣赏 ✔</p>
+<p>你嗓门那么大，我很嗨皮 ✖ </p>
+<p>你大声说话我很害怕，因为我需要安全的环境 ✔</p>
+<p>我感到失望，因为你没有做你答应我的事情 ✖ </p>
+<p>你没做你答应我的事情，我感到失望，因为我希望能信任你 ✔</p>
+<h4 id="3-从情绪的奴隶到主人的自由之路"><a href="#3-从情绪的奴隶到主人的自由之路" class="headerlink" title="3.从情绪的奴隶到主人的自由之路"></a>3.从情绪的奴隶到主人的自由之路</h4><p>第一阶段：“情绪的奴隶”-我们认为自己要为他人的感受负责，进而不断努力让所有人开心。如果别人不开心，我们会感到不安，认为自己有责任要为此做些什么。</p>
+<p>第二阶段：“面目可憎”-我们拒绝考虑他人的感受或需要，不再委曲求全，为了讨好他人而压抑自己。</p>
+<p>第三阶段：“情绪的主人”-我们不再出于恐惧、羞愧或内疚来回应他人的需要，而是因为发自内心的慈悲与爱而互相给予。既不再为他人的感受承担责任，又能全然地为自己的意愿、感受、行为负责。</p>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p>【1】 <a target="_blank" rel="noopener" href="https://book.douban.com/subject/35519608/">https://book.douban.com/subject/35519608/</a></p>
 
                 
             </div>
@@ -683,7 +716,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://weishicharity.cn/2022/03/16/learning-from-data-1/">http://weishicharity.cn/2022/03/16/learning-from-data-1/</a>
+                    <a href="http://weishicharity.cn/2022/03/20/fei-bao-li-gou-tong-1-5/">http://weishicharity.cn/2022/03/20/fei-bao-li-gou-tong-1-5/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -721,8 +754,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">笔记</span>
+                                <a href="/tags/%E6%80%9D%E8%80%83/">
+                                    <span class="chip bg-color">思考</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A/">
+                                    <span class="chip bg-color">非暴力沟通</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">读书笔记</span>
                                 </a>
                             
                         </div>
@@ -918,17 +959,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/16/hello-world/">
+                <a href="/2022/03/20/fei-bao-li-gou-tong-1-5/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="非暴力沟通（Nonviolent Communication）1-5章读书笔记">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">非暴力沟通（Nonviolent Communication）1-5章读书笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -938,9 +980,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -948,6 +990,23 @@
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A/">
+                        <span class="chip bg-color">非暴力沟通</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -959,13 +1018,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/16/learning-from-data-2/">
+                <a href="/2022/03/18/jiao-cha-shang-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="learning from data 2">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记">
                         
-                        <span class="card-title">learning from data 2</span>
+                        <span class="card-title">信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -976,7 +1035,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
                             </span>
                         <span class="publish-author">
                             
@@ -993,8 +1052,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">笔记</span>
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
                     </a>
                     
                 </div>
