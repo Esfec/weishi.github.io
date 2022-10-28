@@ -1,0 +1,1686 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记, 为事事">
+    <meta name="description" content="最近打算把GAN系列的生成模型做一个系统的阐述，以此加深自己的理解能力。由于不同的模型在度量损失值时会用到信息论相关知识，所以在分析模型之前，有必要把信息量、熵、KL散度、极大似然估计等前置知识搞清楚。
+1.1 信息论浅显知识1.1.1 为">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记 | 为事事</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">为事事</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list" style="zoom: 0.6;"></i>
+      
+      <span>Medias</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Musics</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/books">
+          
+          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Books</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/galleries">
+          
+          <i class="fas fa-image" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Galleries</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">为事事</div>
+        <div class="logo-desc">
+            
+            循迹逻辑与锻炼文笔
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			Medias
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/musics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Musics</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/movies " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/books " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-book" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Books</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/galleries " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Galleries</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">信息量、熵、相对熵（KL散度）、交叉熵、极大似然估计笔记</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BF%A1%E6%81%AF%E9%87%8F/">
+                                <span class="chip bg-color">信息量</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%BA%A4%E5%8F%89%E7%86%B5/">
+                                <span class="chip bg-color">交叉熵</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/">
+                                <span class="chip bg-color">极大似然估计</span>
+                            </a>
+                        
+                            <a href="/tags/KL%E6%95%A3%E5%BA%A6/">
+                                <span class="chip bg-color">KL散度</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ml/" class="post-category">
+                                ml
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-03-18
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-04-27
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>最近打算把GAN系列的生成模型做一个系统的阐述，以此加深自己的理解能力。由于不同的模型在度量损失值时会用到信息论相关知识，所以在分析模型之前，有必要把信息量、熵、KL散度、极大似然估计等前置知识搞清楚。</p>
+<h2 id="1-1-信息论浅显知识"><a href="#1-1-信息论浅显知识" class="headerlink" title="1.1 信息论浅显知识"></a>1.1 信息论浅显知识</h2><h3 id="1-1-1-为什么要引入信息论到机器学习中"><a href="#1-1-1-为什么要引入信息论到机器学习中" class="headerlink" title="1.1.1 为什么要引入信息论到机器学习中"></a>1.1.1 为什么要引入信息论到机器学习中</h3><p>我们可以将深度学习训练过程脑补为“人脑模型”与“机器模型”博弈过程，通过迭代不断缩小两个模型之间的差异。如何衡量两个模型之间的差异，是一个比较重要的议题。</p>
+<p>斯图尔特法官在1964年“雅各布伯利斯诉俄亥俄” 案中，坦言自己无法给淫秽物品下一个准确的定义，而是试图采用观察的方式进行界定，说到“<strong>当我看到时我就知晓它</strong>”。</p>
+<p>“机器模型”的训练过程本质上就和斯图尔特法官在认定淫秽这件事情上是一样的，“人脑模型”本身不参与判断也无法量化，取而代之的是训练数据，即“人脑模型”的低维投射。所以说有时候我觉得深度学习是一种自下而上的学习方法。比如说刚出生的小孩儿没有形成对世界的认识，通过训练数据（外部真实世界）的不断反馈，才形成自己的世界观、价值观，所以说不同的训练数据培养出不同的小孩儿。当然这种说法也不一定对，也有一些天才儿童，根本不需要什么训练数据，或者只需要极少样本就能在年幼的时候基本上形成自己的世界观、价值观，甚至有些小孩儿还记得自己的前世记忆。可能这两种论调就属于认识论中“经验主义”和“理性主义”的范畴吧，在这就不多阐述了。</p>
+<p>当然我们可以定性的比较，但是定性的比较无法量化，不能给机器传递有效的信息，也就不能训练。定量比较可以给出一个具体的数值，机器得以训练下去。为了量化两个模型之间的差异，就像货币能量化两个物品的价值一样，科学家们引入了信息论里面的关键思想作为作为中间产物来描述概率分布或者量化概率分布之间的相似性。</p>
+<ul>
+<li><p><em>什么叫做“人脑模型”呢？我们先说图灵测试，图灵测试是为了测试机器能否表现出与人等价或无法区分的智能。即判断的标准是人的标准或者说将判断标准定义为人的标准。训练过程的本质就是“机器模型”不断接近“人脑模型”的过程，直至两者之间的差距缩小到一个可以接受的值。训练数据的本质是经过“人脑模型”官方认证的子模型</em></p>
+</li>
+<li><p><em>信息论是应用数学的一个分支，主要研究的是对一个信号包含信息的多少进行量化</em></p>
+<h3 id="1-1-2-信息量"><a href="#1-1-2-信息量" class="headerlink" title="1.1.2 信息量"></a>1.1.2 信息量</h3></li>
+</ul>
+<p>在说信息量之前，先谈谈信息是什么。1948年，数学家香农在题为“通讯的数学理论”的论文中指出：“信息是用来消除随机不定性的东西”，创建一切宇宙万物的最基本单位是信息。经济管理学家认为“信息是提供决策的有效数据”。不难看出，两种定义都指向信息是数据的本质，数据 = 信息 + 噪音。</p>
+<p>再来说说信息量，信息量是信息的量化表示，花书上是这样描述信息量的性质的：</p>
+<p><em>1.非常可能发生的事件信息量比较少甚至没有信息量 Eg.太阳从东边升起，西方落下</em></p>
+<p><em>2.较不可能发生的事件信息量较大 Eg.国足拿世界杯冠军</em></p>
+<p><em>3.独立事件具有增量的信息 Eg.掷两次硬币正面朝上的信息量应该是掷一次硬币正面朝上信息量的两倍</em></p>
+<p>为了满足以上3点性质,我们定义一个事件的信息量为<code>f(p)=-log2(p)</code>，单位为<code>bit</code></p>
+<p>举例：掷3次硬币正面朝上的概率为</p>
+<p>$$$\frac{1}{8}$$$，信息量为3bits,掷两次硬币正面朝上的概率为$$$\frac{1}{4}$$$,信息量为2bits,掷一次硬币正面朝上的概率为$\frac{1}{2}$，信息量为1bits。由于3次事件均为独立事件，根据定义可得：$$-log_2(\frac{1}{8})=-log_2(\frac{1}{4})-log_2(\frac{1}{2})$$<br>$$\frac{1}{8}=\frac{1}{4}*\frac{1}{2}$$</p>
+<h3 id="1-1-3-信息熵"><a href="#1-1-3-信息熵" class="headerlink" title="1.1.3 信息熵"></a>1.1.3 信息熵</h3><p>信息量只对单个事件的不确定性进行量化，为了衡量一个系统的不确定性或者混乱程度。香农(Shannon)提出了“信息熵”的概念（借用了热力学中熵的概念），先给出信息熵公式：<br>$$H(x)=-\sum_{i=1}^np(x_i)logp(x_i)$$<br>$$p(xi)\le1$$<br>信息熵的公式和信息量的公式本质上一样，只是多了一个求<strong>期望</strong>的过程。这很容易理解，一个系统含有多个事件，每一个事件的贡献度不一样，所以要乘以事件发生的贡献度即概率。</p>
+<p>举例：每天中午吃什么是一个很纠结的问题。假如说现在有两个学生小A、小B面临3种选择，分别是小面、沙县、炒菜。小A没有忌口，吃啥都行，所以选择每一种食材的概率都一样。小B铁了心要吃小面，所以概率很大。现在我们来衡量一下两位同学内心的纠结程度。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>小面</th>
+<th>沙县</th>
+<th>炒菜</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小A</td>
+<td>1/3</td>
+<td>1/3</td>
+<td>1/3</td>
+</tr>
+<tr>
+<td>小B</td>
+<td>8/10</td>
+<td>1/10</td>
+<td>1/10</td>
+</tr>
+<tr>
+<td>$$H(A)=-\frac{1}{3}log\frac{1}{3}-\frac{1}{3}log\frac{1}{3}-\frac{1}{3}log\frac{1}{3}=1.5849$$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>$$H(B)=-\frac{8}{10}log\frac{8}{10}-\frac{1}{10}log\frac{1}{10}-\frac{1}{10}log\frac{1}{10}=0.9217$$<br>很明显小A同学纠结程度大于小B，这也延伸出一个结论。<strong>在系统的事件可能情况数固定的情况下，事件概率的分布越均匀，信息熵越大，该系统越混乱</strong>。这也不难理解：当一张图像的像素有规律的分布在一起，我们会觉得这张看起来图像很舒适。当一张图像打上了马赛克，即将固定区域内的像素取均值再填充，这张图片看起来会很乱，没有主体。<br>接着中午吃什么的话题继续说，假如现在中午吃什么多了一个选择“黄焖鸡”。那么小A和小B的纠结程度会不会变化呢？</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>小面</th>
+<th>沙县</th>
+<th>炒菜</th>
+<th>黄焖鸡</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小A</td>
+<td>1/4</td>
+<td>1/4</td>
+<td>1/4</td>
+<td>1/4</td>
+</tr>
+<tr>
+<td>$$H(A)=-\frac{1}{4}log\frac{1}{4}-\frac{1}{4}log\frac{1}{4}-\frac{1}{4}log\frac{1}{4}-\frac{1}{4}log\frac{1}{4}=2$$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>很明显小A的纠结程度增加了不少，更不知道吃什么了。这里延伸出另外一个结论。<strong>当系统中的事件都均匀分布的时候，事件的可能情况数越多，系统的信息熵越大</strong>。这也很容易理解：刚装修的房间看起来干净、整洁，可是住久了，林林总总的东西越来越多，如果没有及时收纳，房间越来越凌乱。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>那怎样衡量同一个随机变量两个不同分布之间的差异呢？拿小A和小B的饮食习惯举例，我们希望小B的饮食习惯向小A（更规律）靠近，最容易想到的就是做减法，然后最小化这个值。然而这种白给的办法一般都是错的或者说效率很慢。如果我们直接拿$H(A)-H(B)$的值优化我们的目标函数，这样做没有方向，我们还需要模型知道什么食材在原本的基础上多吃，什么食材在原本的基础上应该少吃。不然狡猾的模型为了能达到最小化目标函数的目的，会走向其它错误的方向。这样做也有可能会使得损失函数该需要大力调整的方向只用一点点力气，不怎么需要调整的方向大刀阔斧的做，最后的结果可能正确，但是时间花费很长。所以相对熵是这样定义的：<br>$$D_{KL}(p\mathop{//}q)=\sum_{i=1}^np(x_i)log\frac{p(xi)}{q(xi)}$$<br>$$=\sum_{i=1}^np(xi)logp(xi)-\sum_{i=1}^np(xi)logq(xi)$$<br>$$=-\sum_{i=1}^np(xi)logq(xi) + \sum_{i=1}^np(xi)logp(xi)$$<br>花书上对KL散度衡量性质是这样定义的：当我们使用一种被设计成能够使得概率分布Q产生的消息的长度最小的编码，发送包含由概率分布P产生的符号的消息时，所需要的额外信息量。我的理解是基于概率分布Q,还需要多少额外信息量才能向靠近P。<br>另外从公式可以看出$D_{KL}(p\mathop{//}q)和D_{KL}(q\mathop{//}p)$是不等价的。<strong>所以KL散度的第一个特征是非对称性</strong>；根据吉布斯不等式，可得：$$-\sum_{i=1}^np(xi)logq(xi)\geq -\sum_{i=1}^np(xi)logp(xi) $$所以<strong>第二个性质是KL散度的非负性，即$D_{KL}(p\mathop{//}q) \geq0$</strong></p>
+<p><strong>实例验证KL散度的非对称性</strong><br>假设现在有ABC三个概率分布：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>True</th>
+<th>False</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>1/2</td>
+<td>1/2</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1/10</td>
+<td>9/10</td>
+</tr>
+<tr>
+<td>C</td>
+<td>3/10</td>
+<td>7/10</td>
+</tr>
+<tr>
+<td>$$D_{KL}(A\mathop{//}B)=\frac{1}{2}log\frac{1}{2}\cdot10 +\frac{1}{2}log\frac{1}{2}\cdot\frac{10}{9}=0.736$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(B\mathop{//}A)=\frac{1}{10}log\frac{1}{10}\cdot2 +\frac{9}{10}log\frac{9}{10}\cdot2=0.531$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(A\mathop{//}C)=\frac{1}{2}log\frac{1}{2}\cdot\frac{10}{3} +\frac{1}{2}log\frac{1}{2}\cdot\frac{10}{7}=0.126$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(B\mathop{//}C)=\frac{1}{10}log\frac{1}{10}\cdot\frac{10}{3} +\frac{9}{10}log\frac{9}{10}\cdot\frac{10}{7}=0.168$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$$D_{KL}(C\mathop{//}A)=\frac{3}{10}log\frac{3}{10}\cdot\frac{2}{1} +\frac{7}{10}log\frac{7}{10}\cdot\frac{2}{1}=0.118$$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>从以上的计算结果我们可以得出以下结论：</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><em>基于B和C对A进行编码 比特数（额外信息量）都增加了，且C需要的比特数小于B，说明C更接近A，也说明对一个信息源编码，按照本身的概率分布进行编码，所需信息量最小</em></li>
+<li><em>$D_{KL}(A\mathop{//}B)\neq D_{KL}(B\mathop{//}A),即KL散度不对称$</em></li>
+<li><em>$D_{KL}(B\mathop{//}A)\gt D_{KL}(B\mathop{//}C)+D_{KL}(C\mathop{//}A),即KL散度不满足三角不等式条件，并不是真的距离$</em></li>
+</ul>
+<h3 id="1-1-5-交叉熵"><a href="#1-1-5-交叉熵" class="headerlink" title="1.1.5 交叉熵"></a>1.1.5 交叉熵</h3><p>都有了KL散度能衡量两个概率分布之间的差异了，那么为什么还会出现交叉熵这个概念呢？<br>是这样的，前面的例子举得都是概率分布，而在深度学习中，为了让“机器模型”不断逼近“人脑模型”，我们给的数据都是真实分布。标签要么对、要么错，也就是0和1。所以说$$H(P)=-\sum_{i=1}^np(xi)logp(xi)=0$$那么KL散度剩下的一部分就是交叉熵$H(PQ)$了。即是说$$D_{KL}(p\mathop{//}q)=H(PQ)-H(P)$$<br>$$H(PQ)=-\sum_{i=1}^np(xi)logq(xi)$$<br>而在真实分布中，$P(xi)$只有0和1两种情况，故以上公式可以改写为：<br>$$$H(PQ)=-plog_2q-(1-p)log2(1-q)$$$<br>进一步改写为：<br>$$<br>H(PQ)=-ylog_2\widehat{y}-(1-y)log2(1-\widehat{y})<br>$$<br>现在就变成了我们耳熟能详的交叉熵损失函数（CrossEntropyLoss），其中：$$$y=标签,\widehat{y}=预测值$$$</p>
+<h2 id="1-2-极大似然估计"><a href="#1-2-极大似然估计" class="headerlink" title="1.2 极大似然估计"></a>1.2 极大似然估计</h2><p>上面说到斯图尔特法官认定淫秽这件事儿，其实极大似然估计的核心思想和这个实例如出一辙。</p>
+<p>先说说概率是什么，概率，亦称“或然率”，它是反映随机事件出现的可能性大小。随机事件是指在相同条件下，可能出现也可能不出现的事件。例如，从一批有正品和次品的商品中，随意抽取一件，“抽得的是正品”就是一个随机事件。设对某一随机现象进行了n次试验与观察，其中A事件出现了m次，即其出现的频率为m/n。经过大量反复试验，常有m/n越来越接近于某个确定的常数。该常数即为事件A出现的概率，常用P(A)表示。<br>“似然”本质上是概率的反向应用，拿摸球举例子。假如从黑箱我们一共摸了10次球，3黑7白。那么是不是可以推断出黑箱里面黑球与白球的比例约等于3:7，或者说3:7的概率最大。我们可以算出此次事件的似然值。即$$$\frac{3}{10}^3·\frac{7}{10}^7=0.0022，将具体的比例换算成p和1-p 可得p^3·(1-p)^7。要使似然值最大，那么p=\frac{3}{10},p等于\frac{2}{10}、\frac{9}{10}$$$或者其它值，似然值都不是最大的。所以<strong>通过可以观测到的结果估算某一个概率分布，我么就要尽可能的最大化似然值，这就是极大似然估计</strong>。</p>
+<p>概念应该讲清楚了，接下来说为什么把极大似然估计放在交叉熵后面来讲。现实生活中我们经常会用到极大似然估计，比如说看到蚂蚁搬家，我们就知道大概要下雨了。准备去餐馆吃饭，一家门庭若市，一家门可罗雀。那我们潜意识就会认为第一家的饭好吃。那为什么我们会根据观测到的内容推断出未知的场景呢？其一观测到的内容本质上是未知场景的低维投射，它可以反应未知场景的一部分情况；其二观测到的内容是经过“人脑模型”认证的东西，是打了标签的，是长期以来积累的经验。</p>
+<p>既然现实生活中都能用极大似然估测未知情况，想必深度学习也能用极大似然预测未知概率分布（为什么呢，因为我觉得越简单的道理越具有普适性），回到损失函数中，在处理分类问题时。比方说猫、狗、车、飞机的四分类问题。输入一张图片经过一长串网络最后通过softmax层后我们会得到一个类似[0.7,0.1,0.1,0.1]的概率分布。真实标签是[0,0,0,1]这说明机器认为这张图片是猫的概率最大，但是标签确显示这张图片是飞机。根据刚才摸球的例子我们可以用连乘算出似然值。$0.7^0·0.1^0·0.1^0·0.1^1=0.1$，理论上就可以把似然值当成loss去做梯度上升。当然连乘看起来太麻烦。我们可以改成连加(不影响结果)，假设问题为二分类则我们需要最大化的似然值为：<br>$$p^x·(1-p)^{1-x}$$<br>加上log将连乘改成连加：<br>$$log(p^x·(1-p)^{1-x})$$<br>$$=xlogp+(1-x)log(1-p)$$<br>$$=ylog\widehat{y}+(1-y)log(1-\widehat{y})$$<br>由于这里是最大化似然值，加上一个负号就变成了我们需要最小化的loss:<br>$$loss=-ylog\widehat{y}-(1-y)log(1-\widehat{y})$$<br>可以发现，由极大似然推出来的损失函数和由交叉熵推出来的损失函数一样，只是前者为了方便，加上了log把连乘变成连加，后者的log是定义出来的。</p>
+<h2 id="2-1-总结与思考"><a href="#2-1-总结与思考" class="headerlink" title="2.1 总结与思考"></a>2.1 总结与思考</h2><p>结合手里面的书籍和网上的一些资料（尤其是B站UP主<strong>王木头学科学</strong>），本文记录了自己学习GAN时遇到的一些概念并以“实例计算、结合生活”等方法阐述了自己的理解（当然是浅显的、不专业的、管中窥豹的）。我自己是比较喜欢这种方法的，因为我觉得理论和生活虽然是不同次元、不同维度的东西，但其本质上是紧密联系的，我们看不到联系可能是我们平时习惯了线性的思维方式，也有可能我们思考问题的维度太低。</p>
+<p>最后再回到信息熵这里，既然熵可以度量一个系统的混乱程度，那么熵这个概念有没有可能和<strong>景观评价</strong>结合一下呢？直觉告诉我是可以的，园林系统本质上是随着时间、空间不断变幻的<strong>时空序列</strong>，人流量、绿量、生物量、地形地貌等时空数据构成了这个序列。但这些数据从应用角度熵来说并不等同于概率分布，如何量化不同数据之间的差异可能是一个比较重要的议题，此外，由于专业的特殊性如何找到正确的标签值可能是另外一项关键问题。</p>
+<h2 id="2-2-参考资料"><a href="#2-2-参考资料" class="headerlink" title="2.2 参考资料"></a>2.2 参考资料</h2><p>【1】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15V411W7VB?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV15V411W7VB?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0</a></p>
+<p>【2】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wq4y1L7Tu?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Wq4y1L7Tu?from=search&amp;seid=1225936871860581982&amp;spm_id_from=333.337.0.0</a></p>
+<p>【3】<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A6%82%E7%8E%87/828845">https://baike.baidu.com/item/%E6%A6%82%E7%8E%87/828845</a></p>
+<p>【4】<a target="_blank" rel="noopener" href="https://blog.csdn.net/oBrightLamp/article/details/85269091">https://blog.csdn.net/oBrightLamp/article/details/85269091</a></p>
+<p>【5】<a target="_blank" rel="noopener" href="https://www.thepaper.cn/newsDetail_forward_2727085">https://www.thepaper.cn/newsDetail_forward_2727085</a></p>
+<p>【6】<a target="_blank" rel="noopener" href="https://book.douban.com/subject/27087503/">https://book.douban.com/subject/27087503/</a></p>
+<p>【7】<a target="_blank" rel="noopener" href="https://book.douban.com/subject/33437381/">https://book.douban.com/subject/33437381/</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">为事</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://weishicharity.cn/2022/03/18/jiao-cha-shang-bi-ji/">http://weishicharity.cn/2022/03/18/jiao-cha-shang-bi-ji/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">为事</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BF%A1%E6%81%AF%E9%87%8F/">
+                                    <span class="chip bg-color">信息量</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BA%A4%E5%8F%89%E7%86%B5/">
+                                    <span class="chip bg-color">交叉熵</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/">
+                                    <span class="chip bg-color">极大似然估计</span>
+                                </a>
+                            
+                                <a href="/tags/KL%E6%95%A3%E5%BA%A6/">
+                                    <span class="chip bg-color">KL散度</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC81NTc3OC8zMjI0NA==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/03/20/fei-bao-li-gou-tong-1-5/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="非暴力沟通（Nonviolent Communication）1-5章读书笔记">
+                        
+                        <span class="card-title">非暴力沟通（Nonviolent Communication）1-5章读书笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            为事
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A/">
+                        <span class="chip bg-color">非暴力沟通</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/03/18/guan-yu-xue-xi-de-si-kao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="关于记录学习的思考">
+                        
+                        <span class="card-title">关于记录学习的思考</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">深度思考</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%80%89%E6%8B%A9/">
+                        <span class="chip bg-color">选择</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 为事事<br />'
+            + '文章作者: 为事<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <a href="/about" target="_blank">为事</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">153.2k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "3";
+                        var startDate = "17";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Esfec" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:973264629@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=973264629" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 973264629" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/column/c_1462732619745640449" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/column/c_1462732619745640449" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "5121765a"
+        });
+        daovoice('update');
+    </script>
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
